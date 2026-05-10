@@ -1,0 +1,26 @@
+<header class="site-header">
+  <div class="container nav-wrap">
+    <% const navSiteName = settings.siteName || 'Prediksi Bola'; %>
+    <% if (activePage === 'home') { %>
+      <button class="brand" id="logoBtn" type="button" aria-label="<%= navSiteName %>">
+        <img class="brand-logo" src="<%= settings.logoUrl || '/favicon.png' %>" alt="<%= navSiteName %>" loading="eager">
+        <span class="brand-text"><%= navSiteName %></span>
+      </button>
+    <% } else { %>
+      <a class="brand" href="/" aria-label="<%= navSiteName %>">
+        <img class="brand-logo" src="<%= settings.logoUrl || '/favicon.png' %>" alt="<%= navSiteName %>" loading="eager">
+        <span class="brand-text"><%= navSiteName %></span>
+      </a>
+    <% } %>
+    <nav class="main-nav" aria-label="Navigasi utama">
+      <a class="<%= activePage === 'home' ? 'active' : '' %>" href="/">Home</a>
+      <a class="<%= activePage === 'parlay' ? 'active' : '' %>" href="/prediksi-parlay">Prediksi Parlay</a>
+      <a class="<%= activePage === 'live' ? 'active' : '' %>" href="/live">Live Score</a>
+      <% if (isAdmin) { %><a href="/admin">Admin</a><% } %>
+    </nav>
+    <form class="nav-search" action="/search" method="get" role="search">
+      <input id="q" name="q" type="search" value="<%= query && query.q ? query.q : '' %>" placeholder="Cari tim atau liga..." aria-label="Cari tim atau liga" autocomplete="off" />
+      <button type="submit" aria-label="Cari">⌕</button>
+    </form>
+  </div>
+</header>

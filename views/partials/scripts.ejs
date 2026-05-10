@@ -1,0 +1,8 @@
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    var year = document.getElementById('y');
+    if(year) year.textContent = new Date().getFullYear();
+  });
+</script>
+<% (scripts || []).forEach(function(src) { %><script src="<%= src %>" defer></script>
+<% }) %>
