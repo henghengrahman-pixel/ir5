@@ -1,0 +1,116 @@
+
+<%- include('../partials/topbar') %>
+
+<section class="hero-big">
+<div class="container hero-flex">
+<div>
+<span class="eyebrow">Premium Prediction Portal</span>
+<h1 style="font-size:56px;line-height:1.05;margin:12px 0 18px;font-weight:900">Prediksi Bola Hari Ini</h1>
+<p style="color:#9ca3af;font-size:18px;max-width:700px">
+Analisa pertandingan pilihan dengan statistik, performa tim, odds market, dan insight pertandingan yang disusun lebih natural dan nyaman dibaca.
+</p>
+</div>
+
+<div class="hero-panel">
+<h3 style="margin-bottom:18px">Big Match Highlight</h3>
+<% const feature = posts[0]; %>
+<% if(feature && feature.predictions && feature.predictions[0] && feature.predictions[0].matches[0]) { 
+const m = feature.predictions[0].matches[0];
+const homeLogo = m.home?.logo || m.teams?.home?.logo || '';
+const awayLogo = m.away?.logo || m.teams?.away?.logo || '';
+%>
+<div class="teams-row">
+<div class="team-box">
+<img src="<%= homeLogo %>" onerror="this.style.display='none'">
+<h3><%= m.home?.name || m.teams?.home?.name || 'Home' %></h3>
+</div>
+<div class="vs-badge">VS</div>
+<div class="team-box">
+<img src="<%= awayLogo %>" onerror="this.style.display='none'">
+<h3><%= m.away?.name || m.teams?.away?.name || 'Away' %></h3>
+</div>
+</div>
+<% } %>
+</div>
+</div>
+</section>
+
+<section class="container">
+<div class="minimal-banner">
+<div>
+<strong style="font-size:18px">Prediksi Pilihan & Big Match</strong>
+<p style="color:#9ca3af;margin-top:6px">Update pertandingan populer setiap hari.</p>
+</div>
+<a class="detail-btn" href="/">Lihat Semua</a>
+</div>
+
+<div class="match-grid">
+<%
+const allMatches = posts.flatMap(p => (p.predictions||[]).flatMap(l => (l.matches||[]).map(m => ({...m, league:l.league, post:p}))));
+allMatches.slice(0,24).forEach(function(match){
+const homeLogo = match.home?.logo || match.teams?.home?.logo || '';
+const awayLogo = match.away?.logo || match.teams?.away?.logo || '';
+const homeName = match.home?.name || match.teams?.home?.name || 'Home';
+const awayName = match.away?.name || match.teams?.away?.name || 'Away';
+%>
+
+<article class="match-card-horizontal">
+<div class="match-card-top">
+<div><strong><%= match.league || 'League' %></strong></div>
+<div><%= match.time || '00:00' %> WIB</div>
+</div>
+
+<div class="teams-row">
+<div class="team-box">
+<img src="<%= homeLogo %>" alt="<%= homeName %>" loading="lazy">
+<h3><%= homeName %></h3>
+<div class="form-row">
+<span class="form w">W</span>
+<span class="form d">D</span>
+<span class="form l">L</span>
+</div>
+</div>
+
+<div class="vs-badge">VS</div>
+
+<div class="team-box">
+<img src="<%= awayLogo %>" alt="<%= awayName %>" loading="lazy">
+<h3><%= awayName %></h3>
+<div class="form-row">
+<span class="form w">W</span>
+<span class="form d">D</span>
+<span class="form l">L</span>
+</div>
+</div>
+</div>
+
+<div class="pick-box">
+<div>
+<div style="font-size:12px;color:#9ca3af">Prediction Pick</div>
+<div class="pick-main"><%= match.pick || match.market || 'HOME WIN' %></div>
+</div>
+
+<div style="text-align:right">
+<div style="font-size:12px;color:#9ca3af">Odds</div>
+<strong><%= match.odds || '1.90' %></strong>
+</div>
+</div>
+
+<div>
+<div style="display:flex;justify-content:space-between;margin-bottom:8px">
+<span style="color:#9ca3af">Confidence</span>
+<strong><%= match.confidence || 68 %>%</strong>
+</div>
+<div class="progress">
+<span style="width:<%= match.confidence || 68 %>%"></span>
+</div>
+</div>
+
+<a class="detail-btn" href="<%= parlayUrl(match.post) %>">Detail Analisa</a>
+</article>
+
+<% }) %>
+</div>
+</section>
+
+<%- include('../partials/footer') %>
