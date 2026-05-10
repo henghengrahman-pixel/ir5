@@ -1,0 +1,78 @@
+<%- include('../partials/topbar') %>
+<main class="parlay-page">
+  <section class="parlay-hero">
+    <div class="container parlay-hero-grid">
+      <div>
+        <nav class="breadcrumb"><a href="/">Home</a><span>/</span><strong>Prediksi Parlay</strong></nav>
+        <span class="eyebrow">Premium Match Preview</span>
+        <h1>Prediksi Parlay Hari Ini</h1>
+        <p>Rangkuman pertandingan pilihan, confidence, odds estimasi, form tim, dan analisa natural yang disusun agar mudah dibaca.</p>
+      </div>
+      <div class="hero-card parlay-summary-card">
+        <span>Total Artikel</span>
+        <strong><%= allPosts.length %></strong>
+        <p>Data tersimpan dari sistem existing dan tetap kompatibel dengan scheduler.</p>
+      </div>
+    </div>
+  </section>
+  <section class="container filter-panel">
+    <div class="filter-search"><input id="matchFilter" type="search" placeholder="Cari liga, tim, atau pick..." autocomplete="off"></div>
+    <div class="filter-chips" id="leagueChips">
+      <button class="chip active" data-league="all">Semua Liga</button>
+      <% const leagueList = Array.from(new Set(allPosts.flatMap(function(p){ return (p.predictions || []).map(function(l){ return l.league; }); }).filter(Boolean))).slice(0,10); %>
+      <% leagueList.forEach(function(league){ %><button class="chip" data-league="<%= league.toLowerCase() %>"><%= league %></button><% }) %>
+    </div>
+  </section>
+  <% const bigMatches = allPosts.flatMap(function(p){ return (p.predictions || []).flatMap(function(l){ return (l.matches || []).map(function(m){ return Object.assign({}, m, {league:l.league, post:p}); }); }); }).sort(function(a,b){ return Number(b.confidence || 0) - Number(a.confidence || 0); }).slice(0,3); %>
+  <% if (bigMatches.length) { %>
+  <section class="container big-match-section">
+    <div class="section-head compact"><div><span class="eyebrow">Big Match</span><h2>Highlight Pilihan</h2></div></div>
+    <div class="big-match-grid">
+      <% bigMatches.forEach(function(match){ const teams = String(match.match || '').split(' vs '); %>
+      <article class="big-card match-search-item" data-league="<%= String(match.league || '').toLowerCase() %>" data-search="<%= [match.league, match.match, match.pick, match.ou].join(' ').toLowerCase() %>">
+        <div class="match-league"><span><%= match.league %></span><b><%= match.time %></b></div>
+        <h3><%= match.match %></h3>
+        <div class="big-pick"><span>Pick</span><strong><%= match.market || match.pick %></strong></div>
+        <div class="confidence"><span style="width:<%= match.confidence %>%"></span></div>
+        <small>Confidence <%= match.confidence %>% • Odds <%= match.odds %></small>
+        <a href="<%= parlayUrl(match.post) %>">Buka Detail</a>
+      </article>
+      <% }) %>
+    </div>
+  </section>
+  <% } %>
+  <section class="container posts-grid">
+    <% if (!posts.length) { %>
+      <div class="empty-state"><h2>Belum ada prediksi.</h2><p>Data prediksi akan tampil setelah scheduler/admin menambahkan artikel.</p></div>
+    <% } %>
+    <% posts.forEach(function(post){ %>
+      <article class="post-card match-search-item" data-league="<%= (post.predictions || []).map(function(l){return l.league}).join(' ').toLowerCase() %>" data-search="<%= [post.title, post.excerpt, (post.tags || []).join(' '), (post.predictions || []).map(function(l){return l.league + ' ' + (l.matches || []).map(function(m){return m.match}).join(' ')}).join(' ')].join(' ').toLowerCase() %>">
+        <% if (post.thumbnail) { %><a href="<%= parlayUrl(post) %>" class="post-cover"><img src="<%= post.thumbnail %>" alt="<%= post.title %>" loading="lazy"></a><% } %>
+        <div class="post-body">
+          <div class="post-meta"><span><%= post.category || 'Prediksi Parlay' %></span><span><%= fmtDate(post.createdAt) %></span></div>
+          <h2><a href="<%= parlayUrl(post) %>"><%= post.title %></a></h2>
+          <p><%= post.excerpt || 'Preview pertandingan pilihan hari ini dengan analisa form, odds, dan confidence.' %></p>
+          <div class="stat-row">
+            <span><b><%= post.parlayStats.totalMatches %></b> Match</span>
+            <span><b><%= post.parlayStats.avgConfidence %>%</b> Confidence</span>
+            <span><b><%= post.parlayStats.totalOdds %></b> Odds</span>
+          </div>
+          <div class="mini-match-list">
+            <% (post.predictions || []).slice(0,2).forEach(function(league){ (league.matches || []).slice(0,2).forEach(function(match){ %>
+              <div class="mini-match"><span><%= match.time %></span><strong><%= match.match %></strong><em><%= match.market %></em></div>
+            <% }) }) %>
+          </div>
+          <a class="btn-detail" href="<%= parlayUrl(post) %>">Lihat Analisa</a>
+        </div>
+      </article>
+    <% }) %>
+  </section>
+  <% if (totalPages > 1) { %>
+  <nav class="container pager">
+    <% for(let i=1;i<=totalPages;i++){ %><a class="<%= i===currentPage?'active':'' %>" href="/prediksi-parlay?page=<%= i %>"><%= i %></a><% } %>
+  </nav>
+  <% } %>
+</main>
+<script type="application/ld+json"><%- JSON.stringify({"@context":"https://schema.org","@type":"CollectionPage","name":pageTitle,"description":pageDescription,"url":canonical || ''}) %></script>
+<%- include('../partials/footer') %>
+<script src="/assets/js/parlay.js" defer></script>

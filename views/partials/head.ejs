@@ -1,0 +1,19 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title><%= pageTitle || settings.metaTitle || settings.siteName || 'Prediksi Bola' %></title>
+<meta name="description" content="<%= pageDescription || settings.metaDescription || 'Portal prediksi bola dan parlay dengan tampilan data pertandingan yang rapi.' %>" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<meta name="theme-color" content="#0b1220" />
+<% if (typeof canonical !== 'undefined' && canonical) { %><link rel="canonical" href="<%= canonical %>" /><% } %>
+<meta property="og:title" content="<%= pageTitle || settings.metaTitle || settings.siteName || 'Prediksi Bola' %>" />
+<meta property="og:description" content="<%= pageDescription || settings.metaDescription || '' %>" />
+<meta property="og:type" content="<%= typeof ogType !== 'undefined' ? ogType : 'website' %>" />
+<meta property="og:site_name" content="<%= settings.siteName || 'Prediksi Bola' %>" />
+<% if (typeof canonical !== 'undefined' && canonical) { %><meta property="og:url" content="<%= canonical %>" /><% } %>
+<% if (typeof ogImage !== 'undefined' && ogImage) { %><meta property="og:image" content="<%= ogImage %>" /><% } else if (settings.logoUrl) { %><meta property="og:image" content="<%= settings.logoUrl %>" /><% } %>
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/png" href="<%= settings.logoUrl || '/favicon.png' %>" />
+<% (styles || []).forEach(function(href) { %><link rel="stylesheet" href="<%= href %>" /><% }) %>
