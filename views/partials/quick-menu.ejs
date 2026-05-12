@@ -1,1 +1,0 @@
-<% if ((quickActions || []).length) { %><nav class="quick-menu"><% quickActions.slice(0,5).forEach(function(item){ %><a href="<%= item.link || '#' %>"><% if(item.icon){ %><img src="<%= item.icon %>" alt="<%= item.title %>" onerror="this.remove()"><% } else { %><span>⚽</span><% } %><b><%= item.title %></b></a><% }) %></nav><% } %>
