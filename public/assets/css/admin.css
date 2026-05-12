@@ -750,3 +750,153 @@ textarea{
   }
 
 }
+/* =========================================================
+   FIX BLOGGER CMS LAYOUT
+========================================================= */
+
+.admin-form-grid{
+  display:grid !important;
+  grid-template-columns:minmax(0,1fr) 340px !important;
+  gap:0 !important;
+  align-items:start;
+}
+
+.admin-form-left{
+  min-width:0;
+}
+
+.admin-form-right{
+  width:340px;
+  border-left:1px solid #d7dbe3;
+  background:#ffffff;
+  padding:22px;
+  position:sticky;
+  top:0;
+  height:100vh;
+  overflow:auto;
+}
+
+.meta-card{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  padding:16px;
+  margin-bottom:16px;
+}
+
+.meta-card h3{
+  margin:0 0 14px;
+  color:#111827;
+  font-size:16px;
+}
+
+.meta-card label{
+  display:grid;
+  gap:8px;
+  margin-bottom:14px;
+  color:#374151;
+  font-size:13px;
+  font-weight:700;
+}
+
+.meta-card input,
+.meta-card textarea,
+.meta-card select{
+  background:#fff !important;
+  border:1px solid #d1d5db !important;
+  color:#111827 !important;
+}
+
+.meta-card textarea{
+  min-height:90px;
+}
+
+.post-options{
+  display:grid !important;
+  gap:12px;
+}
+
+.checkbox{
+  background:#fff !important;
+  border:1px solid #d1d5db !important;
+  color:#111827 !important;
+}
+
+.admin-actions-row{
+  display:flex !important;
+  margin-top:18px;
+}
+
+.editor-main-wrap{
+  background:#f3f4f6;
+  min-height:100vh;
+}
+
+.editor-topbar{
+  background:#fff;
+  border-bottom:1px solid #d7dbe3;
+  padding:20px 28px;
+}
+
+.editor-topbar input{
+  width:100%;
+  border:0;
+  outline:none;
+  background:transparent;
+  color:#111827;
+  font-size:42px;
+  font-weight:800;
+  line-height:1.2;
+}
+
+.editor-topbar input::placeholder{
+  color:#9ca3af;
+}
+
+.ck-editor{
+  max-width:900px;
+  margin:24px auto;
+}
+
+.ck-editor__editable_inline{
+  min-height:900px !important;
+  padding:50px 60px !important;
+  font-size:17px !important;
+  line-height:1.95 !important;
+}
+
+@media(max-width:1200px){
+
+  .admin-form-grid{
+    grid-template-columns:1fr !important;
+  }
+
+  .admin-form-right{
+    width:100%;
+    height:auto;
+    border-left:0;
+    border-top:1px solid #d7dbe3;
+  }
+
+}
+
+@media(max-width:768px){
+
+  .editor-topbar{
+    padding:18px;
+  }
+
+  .editor-topbar input{
+    font-size:28px;
+  }
+
+  .ck-editor{
+    margin:0;
+  }
+
+  .ck-editor__editable_inline{
+    padding:24px !important;
+    min-height:600px !important;
+  }
+
+}
