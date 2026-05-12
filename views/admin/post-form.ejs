@@ -6,11 +6,13 @@
     <div class="admin-page-head">
       <div>
         <span class="eyebrow">News CMS</span>
+
         <h1>
           <%= post ? 'Edit Berita Bola' : 'Tambah Berita Bola' %>
         </h1>
+
         <p>
-          Kelola artikel berita bola dengan editor modern dan format otomatis.
+          Kelola artikel berita bola dengan visual editor modern seperti Blogger.
         </p>
       </div>
     </div>
@@ -56,7 +58,7 @@
         <input
           name="category"
           value="<%= post?.category || 'Berita Bola' %>"
-          placeholder="Liga Inggris, Liga Indonesia, Transfer, Big Match"
+          placeholder="Liga Inggris, Liga Indonesia, Transfer"
         >
       </label>
 
@@ -80,7 +82,7 @@
       </label>
 
       <label>
-        <span>Tags (pisah koma)</span>
+        <span>Tags</span>
 
         <input
           name="tags"
@@ -151,130 +153,104 @@
       <!-- TOOLBAR -->
       <!-- ===================================================== -->
 
-      <div
-        class="editor-toolbar full"
-        data-target="contentEditor"
-      >
+      <div class="full">
 
-        <button
-          type="button"
-          data-wrap="<h2>|</h2>"
-        >
-          H2
-        </button>
+        <div class="editor-toolbar">
 
-        <button
-          type="button"
-          data-wrap="<h3>|</h3>"
-        >
-          H3
-        </button>
+          <button type="button" data-cmd="formatBlock" data-value="h2">
+            H2
+          </button>
 
-        <button
-          type="button"
-          data-wrap="<strong>|</strong>"
-        >
-          Bold
-        </button>
+          <button type="button" data-cmd="formatBlock" data-value="h3">
+            H3
+          </button>
 
-        <button
-          type="button"
-          data-wrap="<em>|</em>"
-        >
-          Italic
-        </button>
+          <button type="button" data-cmd="bold">
+            Bold
+          </button>
 
-        <button
-          type="button"
-          data-wrap="<blockquote>|</blockquote>"
-        >
-          Quote
-        </button>
+          <button type="button" data-cmd="italic">
+            Italic
+          </button>
 
-        <button
-          type="button"
-          data-insert="<ul>\n<li>Poin pertama</li>\n<li>Poin kedua</li>\n<li>Poin ketiga</li>\n</ul>"
-        >
-          List
-        </button>
+          <button type="button" data-cmd="insertUnorderedList">
+            List
+          </button>
 
-        <button
-          type="button"
-          data-insert="<table>\n<thead>\n<tr>\n<th>Data</th>\n<th>Keterangan</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Tim</td>\n<td>Informasi</td>\n</tr>\n</tbody>\n</table>"
-        >
-          Table
-        </button>
+          <button type="button" data-cmd="blockquote">
+            Quote
+          </button>
 
-        <button
-          type="button"
-          data-insert="<p><img src='URL_GAMBAR' alt='Berita Bola'></p>"
-        >
-          Image
-        </button>
+          <button type="button" id="insertLinkBtn">
+            Link
+          </button>
 
-        <button
-          type="button"
-          data-insert="<p><a href='URL_LINK'>Teks Link</a></p>"
-        >
-          Link
-        </button>
+          <button type="button" id="insertImageBtn">
+            Image
+          </button>
 
-        <button
-          type="button"
-          data-insert="<iframe src='https://www.youtube.com/embed/VIDEO_ID' title='YouTube video' allowfullscreen></iframe>"
-        >
-          YouTube
-        </button>
+          <button type="button" id="insertYoutubeBtn">
+            YouTube
+          </button>
 
-        <button
-          type="button"
-          id="paragraphBtn"
-        >
-          Auto Paragraph
-        </button>
+          <button type="button" id="insertTableBtn">
+            Table
+          </button>
+
+          <button type="button" id="clearFormatBtn">
+            Clear
+          </button>
+
+        </div>
 
       </div>
 
       <!-- ===================================================== -->
-      <!-- CONTENT -->
+      <!-- VISUAL EDITOR -->
       <!-- ===================================================== -->
 
-      <label class="full editor-field">
+      <div class="full editor-layout">
 
-        <div class="editor-head">
-          <span>Isi Berita</span>
+        <div class="editor-panel">
 
-          <div class="editor-info">
-            Support HTML, gambar, tabel, embed YouTube, heading, list.
+          <div class="editor-head">
+            <span>Visual Editor</span>
+
+            <div class="editor-info">
+              Tulis artikel seperti Blogger / WordPress
+            </div>
           </div>
+
+          <div
+            id="visualEditor"
+            class="visual-editor"
+            contenteditable="true"
+          ><%- post?.content || '<p>Mulai tulis berita bola di sini...</p>' %></div>
+
+          <textarea
+            id="contentEditor"
+            name="content"
+            hidden
+          ><%= post?.content || '' %></textarea>
+
         </div>
 
-        <textarea
-          id="contentEditor"
-          name="content"
-          rows="22"
-          placeholder="<p>Tulis isi berita di sini...</p>"
-        ><%= post?.content || '' %></textarea>
+        <!-- ================================================= -->
+        <!-- PREVIEW -->
+        <!-- ================================================= -->
 
-      </label>
+        <div class="preview-panel">
 
-      <!-- ===================================================== -->
-      <!-- PREVIEW -->
-      <!-- ===================================================== -->
+          <div class="preview-head">
+            <h3>Preview Artikel</h3>
+          </div>
 
-      <div class="full live-preview-wrap">
+          <div
+            id="livePreview"
+            class="live-preview"
+          ></div>
 
-        <div class="preview-head">
-          <h3>Preview Artikel</h3>
-          <button type="button" id="refreshPreview">
-            Refresh Preview
-          </button>
         </div>
-
-        <div
-          id="livePreview"
-          class="live-preview"
-        ></div>
 
       </div>
 
@@ -323,7 +299,10 @@
           Simpan Berita
         </button>
 
-        <a class="admin-btn ghost" href="/admin/posts">
+        <a
+          class="admin-btn ghost"
+          href="/admin/posts"
+        >
           Kembali
         </a>
 
@@ -340,8 +319,11 @@
      SLUG AUTO
   ========================================================= */
 
-  const titleInput = document.getElementById('titleInput');
-  const slugInput = document.getElementById('slugInput');
+  const titleInput =
+    document.getElementById('titleInput');
+
+  const slugInput =
+    document.getElementById('slugInput');
 
   if(titleInput && slugInput){
 
@@ -350,9 +332,13 @@
       if(slugInput.value.trim()) return;
 
       slugInput.value = titleInput.value
+
         .toLowerCase()
+
         .trim()
+
         .replace(/[^a-z0-9]+/g,'-')
+
         .replace(/^-|-$/g,'');
 
     });
@@ -360,125 +346,225 @@
   }
 
   /* =========================================================
+     VISUAL EDITOR
+  ========================================================= */
+
+  const editor =
+    document.getElementById('visualEditor');
+
+  const textarea =
+    document.getElementById('contentEditor');
+
+  const preview =
+    document.getElementById('livePreview');
+
+  function syncEditor(){
+
+    textarea.value =
+      editor.innerHTML;
+
+    preview.innerHTML =
+      editor.innerHTML;
+
+  }
+
+  editor.addEventListener(
+    'input',
+    syncEditor
+  );
+
+  syncEditor();
+
+  /* =========================================================
      TOOLBAR
   ========================================================= */
 
-  document.querySelectorAll('.editor-toolbar button').forEach((btn) => {
+  document.querySelectorAll('[data-cmd]').forEach(btn => {
 
     btn.addEventListener('click', () => {
 
-      if(btn.id === 'paragraphBtn'){
-        autoParagraph();
-        return;
+      const cmd =
+        btn.dataset.cmd;
+
+      const value =
+        btn.dataset.value || null;
+
+      if(cmd === 'blockquote'){
+
+        document.execCommand(
+          'formatBlock',
+          false,
+          'blockquote'
+        );
+
+      }else{
+
+        document.execCommand(
+          cmd,
+          false,
+          value
+        );
+
       }
 
-      const toolbar = btn.closest('.editor-toolbar');
-      const textarea = document.getElementById(toolbar.dataset.target);
+      editor.focus();
 
-      if (!textarea) return;
-
-      const start = textarea.selectionStart;
-      const end = textarea.selectionEnd;
-
-      const selected =
-        textarea.value.slice(start, end) ||
-        'Tulis teks di sini';
-
-      let insert = btn.dataset.insert || '';
-
-      if (btn.dataset.wrap) {
-
-        const [before, after] =
-          btn.dataset.wrap.split('|');
-
-        insert = before + selected + after;
-      }
-
-      textarea.setRangeText(
-        insert,
-        start,
-        end,
-        'end'
-      );
-
-      textarea.focus();
-
-      renderPreview();
+      syncEditor();
 
     });
 
   });
 
   /* =========================================================
-     AUTO PARAGRAPH
+     LINK
   ========================================================= */
 
-  function autoParagraph(){
+  document.getElementById('insertLinkBtn')
+    .addEventListener('click', () => {
 
-    const textarea =
-      document.getElementById('contentEditor');
+      const url =
+        prompt('Masukkan URL');
 
-    if(!textarea) return;
+      if(!url) return;
 
-    const value =
-      textarea.value.trim();
+      document.execCommand(
+        'createLink',
+        false,
+        url
+      );
 
-    if(!value) return;
+      syncEditor();
 
-    if(
-      /<(p|h1|h2|h3|ul|ol|table|iframe|blockquote)/i.test(value)
-    ){
-      return;
-    }
-
-    const formatted = value
-      .replace(/\r\n/g, '\n')
-      .split(/\n{2,}/)
-      .map(paragraph => {
-
-        const text = paragraph.trim();
-
-        if(!text) return '';
-
-        return `<p>${text.replace(/\n/g,'<br>')}</p>`;
-
-      })
-      .join('\n\n');
-
-    textarea.value = formatted;
-
-    renderPreview();
-
-  }
+    });
 
   /* =========================================================
-     LIVE PREVIEW
+     IMAGE
   ========================================================= */
 
-  const preview =
-    document.getElementById('livePreview');
+  document.getElementById('insertImageBtn')
+    .addEventListener('click', () => {
 
-  const contentEditor =
-    document.getElementById('contentEditor');
+      const url =
+        prompt('Masukkan URL gambar');
 
-  function renderPreview(){
+      if(!url) return;
 
-    if(!preview || !contentEditor) return;
+      document.execCommand(
+        'insertHTML',
+        false,
+        `<p><img src="${url}" alt="Berita Bola"></p>`
+      );
 
-    preview.innerHTML =
-      contentEditor.value;
+      syncEditor();
 
-  }
+    });
 
-  document
-    .getElementById('refreshPreview')
-    ?.addEventListener('click', renderPreview);
+  /* =========================================================
+     YOUTUBE
+  ========================================================= */
 
-  contentEditor?.addEventListener(
-    'input',
-    renderPreview
-  );
+  document.getElementById('insertYoutubeBtn')
+    .addEventListener('click', () => {
 
-  renderPreview();
+      const url =
+        prompt('Masukkan link YouTube');
+
+      if(!url) return;
+
+      let videoId = '';
+
+      if(url.includes('watch?v=')){
+
+        videoId =
+          url.split('watch?v=')[1]
+            .split('&')[0];
+
+      }else if(url.includes('youtu.be/')){
+
+        videoId =
+          url.split('youtu.be/')[1]
+            .split('?')[0];
+
+      }
+
+      if(!videoId) return;
+
+      document.execCommand(
+        'insertHTML',
+        false,
+        `
+        <iframe
+          src="https://www.youtube.com/embed/${videoId}"
+          title="YouTube video"
+          allowfullscreen
+        ></iframe>
+        `
+      );
+
+      syncEditor();
+
+    });
+
+  /* =========================================================
+     TABLE
+  ========================================================= */
+
+  document.getElementById('insertTableBtn')
+    .addEventListener('click', () => {
+
+      document.execCommand(
+        'insertHTML',
+        false,
+        `
+        <table>
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Keterangan</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>Tim</td>
+              <td>Informasi</td>
+            </tr>
+          </tbody>
+        </table>
+        `
+      );
+
+      syncEditor();
+
+    });
+
+  /* =========================================================
+     CLEAR FORMAT
+  ========================================================= */
+
+  document.getElementById('clearFormatBtn')
+    .addEventListener('click', () => {
+
+      document.execCommand(
+        'removeFormat',
+        false,
+        null
+      );
+
+      syncEditor();
+
+    });
+
+  /* =========================================================
+     SUBMIT
+  ========================================================= */
+
+  document.getElementById('postForm')
+    .addEventListener('submit', () => {
+
+      textarea.value =
+        editor.innerHTML;
+
+    });
 
 </script>
