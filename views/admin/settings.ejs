@@ -1,0 +1,21 @@
+<div class="admin-shell"><%- include('partials/sidebar') %><main class="admin-main"><h1>Site Settings</h1><div class="admin-card"><form class="admin-form-grid" method="post" enctype="multipart/form-data" action="/admin/settings">
+<label>Nama Website<input name="siteName" value="<%= settings.siteName || '' %>" required /></label>
+<label>Logo URL<input name="logoUrl" value="<%= settings.logoUrl || '' %>" /></label><label>Upload Logo<input type="file" name="logoFile" accept="image/*"></label>
+<label>Favicon URL<input name="faviconUrl" value="<%= settings.faviconUrl || '' %>" /></label><label>Upload Favicon<input type="file" name="faviconFile" accept="image/*"></label>
+<label>OG Image URL<input name="ogImage" value="<%= settings.ogImage || '' %>" /></label><label>Upload OG Image<input type="file" name="ogImageFile" accept="image/*"></label>
+<label>Background Desktop URL<input name="backgroundDesktop" value="<%= settings.backgroundDesktop || '' %>" /></label><label>Upload BG Desktop<input type="file" name="backgroundDesktopFile" accept="image/*"></label>
+<label>Background Mobile URL<input name="backgroundMobile" value="<%= settings.backgroundMobile || '' %>" /></label><label>Upload BG Mobile<input type="file" name="backgroundMobileFile" accept="image/*"></label>
+<label>Warna Utama<input name="primaryColor" value="<%= settings.primaryColor || '#f5c542' %>" /></label>
+<label>Warna Accent<input name="accentColor" value="<%= settings.accentColor || '#ffb300' %>" /></label>
+<label>Login URL<input name="loginUrl" value="<%= settings.loginUrl || '' %>" /></label>
+<label>Register URL<input name="registerUrl" value="<%= settings.registerUrl || '' %>" /></label>
+<label>Telegram URL<input name="telegramUrl" value="<%= settings.telegramUrl || '' %>" /></label>
+<label>WhatsApp URL<input name="whatsappUrl" value="<%= settings.whatsappUrl || '' %>" /></label>
+<label>Livechat URL<input name="livechatUrl" value="<%= settings.livechatUrl || '' %>" /></label>
+<label>Meta Title<input name="metaTitle" value="<%= settings.metaTitle || '' %>" /></label>
+<label>Keywords<input name="metaKeywords" value="<%= settings.metaKeywords || '' %>" /></label>
+<label class="full">Meta Description<textarea name="metaDescription" rows="4"><%= settings.metaDescription || '' %></textarea></label>
+<label class="full">Running Text<textarea name="runningText" rows="4"><%= settings.runningText || '' %></textarea></label>
+<label class="full">Footer Text<textarea name="footerText" rows="3"><%= settings.footerText || '' %></textarea></label>
+<label class="full">Footer HTML<textarea name="footerHtml" rows="5"><%= settings.footerHtml || '' %></textarea></label>
+<button class="admin-btn" type="submit">Simpan Settings</button></form></div></main></div>

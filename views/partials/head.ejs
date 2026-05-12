@@ -1,0 +1,15 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title><%= pageTitle || settings.metaTitle || settings.siteName || 'Portal Bola' %></title>
+<meta name="description" content="<%= pageDescription || settings.metaDescription || '' %>" />
+<meta name="keywords" content="<%= settings.metaKeywords || '' %>" />
+<meta name="robots" content="index, follow" />
+<% if (typeof canonical !== 'undefined' && canonical) { %><link rel="canonical" href="<%= canonical %>" /><% } %>
+<link rel="icon" href="<%= settings.faviconUrl || settings.logoUrl || '/favicon.ico' %>" />
+<meta property="og:title" content="<%= pageTitle || settings.metaTitle || settings.siteName || 'Portal Bola' %>" />
+<meta property="og:description" content="<%= pageDescription || settings.metaDescription || '' %>" />
+<meta property="og:type" content="<%= typeof ogType !== 'undefined' ? ogType : 'website' %>" />
+<meta property="og:image" content="<%= typeof ogImage !== 'undefined' && ogImage ? ogImage : (settings.ogImage || settings.logoUrl || '') %>" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json"><%- JSON.stringify((typeof schema !== 'undefined' && schema) ? schema : { '@context':'https://schema.org', '@type':'WebSite', name: settings.siteName || 'Portal Bola', url: (typeof canonical !== 'undefined' ? canonical : '') }) %></script>
+<% (styles || []).forEach(function(href) { %><link rel="stylesheet" href="<%= href %>" /><% }) %>

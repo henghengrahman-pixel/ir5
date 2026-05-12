@@ -1,0 +1,31 @@
+<div class="admin-shell">
+  <%- include('partials/sidebar') %>
+  <main class="admin-main">
+    <h1><%= post ? 'Edit Artikel / Prediksi' : 'Tambah Artikel / Prediksi' %></h1>
+    <form class="admin-card admin-form-grid" method="post" enctype="multipart/form-data" action="<%= post ? '/admin/posts/' + post.id + '/update' : '/admin/posts' %>">
+      <label class="full">Judul<input name="title" value="<%= post?.title || '' %>" required></label>
+      <label>Slug URL<input name="slug" value="<%= post?.slug || '' %>" placeholder="otomatis kalau dikosongkan"></label>
+      <label>Jenis<select name="type"><option value="article" <%= post?.type !== 'prediction' ? 'selected' : '' %>>Artikel Berita</option><option value="prediction" <%= post?.type === 'prediction' ? 'selected' : '' %>>Prediksi Bola</option></select></label>
+      <label>Kategori<input name="category" value="<%= post?.category || 'Berita Bola' %>"></label>
+      <label>Author<input name="author" value="<%= post?.author || 'Redaksi Bola' %>"></label>
+      <label>Tanggal<input type="datetime-local" name="createdAt" value="<%= post?.createdAt ? new Date(post.createdAt).toISOString().slice(0,16) : '' %>"></label>
+      <label>Tags pisah koma<input name="tags" value="<%= (post?.tags || []).join(', ') %>" placeholder="Liga Inggris, Big Match"></label>
+      <label>Thumbnail URL<input name="thumbnailUrl" value="<%= post?.thumbnail || '' %>" placeholder="https://..."></label>
+      <label>Upload Thumbnail<input type="file" name="thumbnailFile" accept="image/*"></label>
+      <label>Cover URL<input name="coverUrl" value="<%= post?.cover || '' %>" placeholder="https://..."></label>
+      <label>Upload Cover<input type="file" name="coverFile" accept="image/*"></label>
+      <label class="full">Excerpt<textarea name="excerpt" rows="3"><%= post?.excerpt || '' %></textarea></label>
+      <div class="full editor-tools"><button type="button" onclick="wrapTag('h2')">H2</button><button type="button" onclick="wrapTag('strong')">Bold</button><button type="button" onclick="wrapTag('em')">Italic</button><button type="button" onclick="insertHtml('<blockquote>Quote...</blockquote>')">Quote</button><button type="button" onclick="insertHtml('<ul><li>List item</li></ul>')">List</button><button type="button" onclick="insertHtml('<table><tr><th>Kolom</th></tr><tr><td>Isi</td></tr></table>')">Table</button><button type="button" onclick="insertHtml('<iframe src=&quot;YOUTUBE_EMBED_URL&quot; loading=&quot;lazy&quot;></iframe>')">YouTube</button><button type="button" onclick="insertHtml('<img src=&quot;IMAGE_URL&quot; alt=&quot;&quot;>')">Image</button><button type="button" onclick="insertHtml('<a href=&quot;URL&quot;>Link</a>')">Link</button></div>
+      <label class="full">Isi Artikel HTML<textarea id="contentEditor" name="content" rows="18" placeholder="<p>Isi artikel...</p>"><%= post?.content || '' %></textarea></label>
+      <label class="full">Data Prediksi JSON<textarea name="predictions" rows="14"><%= predictionsText %></textarea></label>
+      <label class="checkbox"><input type="checkbox" name="published" <%= !post || post.published ? 'checked' : '' %>> Publish</label>
+      <label class="checkbox"><input type="checkbox" name="featured" <%= post?.featured ? 'checked' : '' %>> Featured Home</label>
+      <label class="checkbox"><input type="checkbox" name="trending" <%= post?.trending ? 'checked' : '' %>> Trending</label>
+      <div class="admin-actions-row full"><button class="admin-btn" type="submit">Simpan</button><a class="admin-btn ghost" href="/admin/posts">Kembali</a></div>
+    </form>
+  </main>
+</div>
+<script>
+function insertHtml(html){const e=document.getElementById('contentEditor'); const s=e.selectionStart; e.value=e.value.slice(0,s)+html+e.value.slice(e.selectionEnd); e.focus();}
+function wrapTag(tag){const e=document.getElementById('contentEditor'); const s=e.selectionStart, en=e.selectionEnd; const t=e.value.slice(s,en)||'Text'; e.value=e.value.slice(0,s)+`<${tag}>${t}</${tag}>`+e.value.slice(en); e.focus();}
+</script>

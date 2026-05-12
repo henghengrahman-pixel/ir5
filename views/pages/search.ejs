@@ -1,0 +1,4 @@
+<%- include('../partials/topbar') %><%- include('../partials/ticker') %>
+<section class="page-title"><div class="container"><span class="eyebrow">Search</span><h1>Pencarian</h1><form class="searchbar" action="/search"><input name="q" value="<%= q || '' %>" placeholder="Cari berita atau prediksi..."><button class="btn primary">Cari</button></form></div></section>
+<main class="section"><div class="container cards-grid"><% if(posts.length){ posts.forEach(function(post){ %><a class="article-card" href="<%= postUrl(post) %>"><div class="card-body"><div class="meta"><span><%= post.category %></span><span><%= fmtDate(post.createdAt) %></span></div><h3><%= post.title %></h3><p><%= post.excerpt %></p></div></a><% }) } else { %><div class="empty">Masukkan kata kunci untuk mencari.</div><% } %></div></main>
+<%- include('../partials/footer') %><%- include('../partials/quick-menu') %>

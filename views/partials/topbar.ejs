@@ -1,0 +1,20 @@
+<header class="topbar">
+  <div class="container nav">
+    <a href="/" class="brand">
+      <% if (settings.logoUrl) { %><img src="<%= settings.logoUrl %>" alt="<%= settings.siteName %>" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="brand-fallback" style="display:none">⚽</span><% } else { %><span class="brand-fallback">⚽</span><% } %>
+      <strong><%= settings.siteName || 'Portal Bola' %></strong>
+    </a>
+    <nav class="menu" id="mainMenu">
+      <a class="<%= activePage==='home'?'active':'' %>" href="/">Home</a>
+      <a class="<%= activePage==='berita'?'active':'' %>" href="/berita">Berita</a>
+      <a class="<%= activePage==='parlay'?'active':'' %>" href="/prediksi-parlay">Prediksi</a>
+      <a class="<%= activePage==='live'?'active':'' %>" href="/live">Live Score</a>
+      <a href="/search">Search</a>
+    </nav>
+    <div class="nav-actions">
+      <% if(settings.loginUrl){ %><a class="btn" href="<%= settings.loginUrl %>">Login</a><% } %>
+      <% if(settings.registerUrl){ %><a class="btn primary" href="<%= settings.registerUrl %>">Daftar</a><% } %>
+    </div>
+    <button class="btn mobile-toggle" type="button" onclick="document.getElementById('mainMenu').classList.toggle('open')">Menu</button>
+  </div>
+</header>
