@@ -1,1 +1,0 @@
-document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('img').forEach(img=>{img.addEventListener('error',()=>{ if(img.classList.contains('team-logo')) img.src='/assets/img/default-team.png'; });});});
