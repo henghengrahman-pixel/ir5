@@ -1,0 +1,56 @@
+<div class="admin-shell">
+  <%- include('partials/sidebar') %>
+  <main class="admin-main">
+    <h1><%= post ? 'Edit Berita Bola' : 'Tambah Berita Bola' %></h1>
+    <form class="admin-card admin-form-grid" method="post" enctype="multipart/form-data" action="<%= post ? '/admin/posts/' + post.id + '/update' : '/admin/posts' %>">
+      <label class="full">Judul Berita<input name="title" value="<%= post?.title || '' %>" required placeholder="Contoh: Barcelona Siapkan Transfer Besar Musim Panas Ini"></label>
+      <label>Slug URL<input name="slug" value="<%= post?.slug || '' %>" placeholder="otomatis kalau dikosongkan"></label>
+      <label>Kategori<input name="category" value="<%= post?.category || 'Berita Bola' %>" placeholder="Liga Inggris, Liga Indonesia, Transfer, Big Match"></label>
+      <label>Author<input name="author" value="<%= post?.author || 'Redaksi Bola' %>"></label>
+      <label>Tanggal<input type="datetime-local" name="createdAt" value="<%= post?.createdAt ? new Date(post.createdAt).toISOString().slice(0,16) : '' %>"></label>
+      <label>Tags pisah koma<input name="tags" value="<%= (post?.tags || []).join(', ') %>" placeholder="Barcelona, Transfer, Liga Spanyol"></label>
+      <label>Thumbnail URL<input name="thumbnailUrl" value="<%= post?.thumbnail || '' %>" placeholder="https://..."></label>
+      <label>Upload Thumbnail<input type="file" name="thumbnailFile" accept="image/*"></label>
+      <label>Cover URL<input name="coverUrl" value="<%= post?.cover || '' %>" placeholder="https://..."></label>
+      <label>Upload Cover<input type="file" name="coverFile" accept="image/*"></label>
+      <label class="full">Excerpt / Ringkasan<textarea name="excerpt" rows="3" placeholder="Ringkasan singkat untuk card berita"><%= post?.excerpt || '' %></textarea></label>
+
+      <div class="editor-toolbar full" data-target="contentEditor">
+        <button type="button" data-wrap="<h2>|</h2>">Heading</button>
+        <button type="button" data-wrap="<strong>|</strong>">Bold</button>
+        <button type="button" data-wrap="<em>|</em>">Italic</button>
+        <button type="button" data-wrap="<blockquote>|</blockquote>">Quote</button>
+        <button type="button" data-insert="<ul>\n<li>Poin pertama</li>\n<li>Poin kedua</li>\n</ul>">List</button>
+        <button type="button" data-insert="<table><thead><tr><th>Data</th><th>Keterangan</th></tr></thead><tbody><tr><td>Tim</td><td>Info</td></tr></tbody></table>">Table</button>
+        <button type="button" data-insert="<p><img src='URL_GAMBAR' alt='Berita bola'></p>">Image</button>
+        <button type="button" data-insert="<p><a href='URL_LINK'>Teks link</a></p>">Link</button>
+        <button type="button" data-insert="<div class='video-wrap'><iframe src='https://www.youtube.com/embed/VIDEO_ID' title='YouTube video' allowfullscreen></iframe></div>">YouTube</button>
+      </div>
+      <label class="full">Isi Berita HTML<textarea id="contentEditor" name="content" rows="18" placeholder="<p>Tulis isi berita di sini...</p>"><%= post?.content || '' %></textarea></label>
+
+      <label class="checkbox"><input type="checkbox" name="published" <%= !post || post.published ? 'checked' : '' %>> Publish</label>
+      <label class="checkbox"><input type="checkbox" name="trending" <%= post?.trending ? 'checked' : '' %>> Trending</label>
+      <label class="checkbox"><input type="checkbox" name="featured" <%= post?.featured ? 'checked' : '' %>> Artikel Pilihan</label>
+      <div class="admin-actions-row full"><button class="admin-btn" type="submit">Simpan Berita</button><a class="admin-btn ghost" href="/admin/posts">Kembali</a></div>
+    </form>
+  </main>
+</div>
+<script>
+  document.querySelectorAll('.editor-toolbar button').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const toolbar = btn.closest('.editor-toolbar');
+      const textarea = document.getElementById(toolbar.dataset.target);
+      if (!textarea) return;
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const selected = textarea.value.slice(start, end) || 'Tulis teks di sini';
+      let insert = btn.dataset.insert || '';
+      if (btn.dataset.wrap) {
+        const [before, after] = btn.dataset.wrap.split('|');
+        insert = before + selected + after;
+      }
+      textarea.setRangeText(insert, start, end, 'end');
+      textarea.focus();
+    });
+  });
+</script>

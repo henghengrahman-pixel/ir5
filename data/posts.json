@@ -1,0 +1,96 @@
+[
+  {
+    "id": "post-news-1",
+    "title": "Jadwal Big Match Pekan Ini: Liga Besar Mulai Panas",
+    "slug": "jadwal-big-match-pekan-ini-liga-besar-mulai-panas",
+    "category": "Big Match",
+    "tags": [
+      "Big Match",
+      "Jadwal Bola",
+      "Liga Besar"
+    ],
+    "author": "Redaksi Bola",
+    "thumbnail": "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?auto=format&fit=crop&w=1200&q=80",
+    "cover": "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?auto=format&fit=crop&w=1600&q=80",
+    "excerpt": "Deretan pertandingan besar pekan ini menjadi sorotan karena mempertemukan tim papan atas dengan misi berbeda di kompetisi masing-masing.",
+    "content": "<p>Pekan ini menghadirkan sejumlah pertandingan besar dari liga top Eropa dan Indonesia. Duel-duel penting tersebut tidak hanya menarik dari sisi gengsi, tetapi juga berpengaruh pada posisi klasemen.</p><h2>Fokus Pada Konsistensi Tim</h2><p>Tim besar biasanya dituntut menjaga ritme permainan, terutama saat jadwal padat. Rotasi pemain, kondisi kebugaran, dan efektivitas lini depan akan menjadi faktor penting.</p><blockquote>Big match selalu menghadirkan tekanan tinggi, sehingga detail kecil bisa menentukan hasil akhir.</blockquote><p>Untuk pembaca yang mengikuti update harian, halaman live score tetap bisa digunakan untuk memantau pertandingan secara langsung.</p>",
+    "published": true,
+    "trending": true,
+    "featured": true,
+    "type": "article",
+    "autoDelete": false,
+    "createdAt": "2026-05-12T08:00:00.000Z",
+    "updatedAt": "2026-05-12T08:00:00.000Z",
+    "predictions": []
+  },
+  {
+    "id": "post-news-2",
+    "title": "Liga Indonesia Makin Kompetitif, Persaingan Papan Atas Ketat",
+    "slug": "liga-indonesia-makin-kompetitif-persaingan-papan-atas-ketat",
+    "category": "Liga Indonesia",
+    "tags": [
+      "Liga Indonesia",
+      "Sepak Bola Indonesia"
+    ],
+    "author": "Redaksi Bola",
+    "thumbnail": "https://images.unsplash.com/photo-1577223625816-7546f13df25d?auto=format&fit=crop&w=1200&q=80",
+    "cover": "https://images.unsplash.com/photo-1577223625816-7546f13df25d?auto=format&fit=crop&w=1600&q=80",
+    "excerpt": "Persaingan Liga Indonesia semakin menarik dengan jarak poin yang rapat dan performa klub papan atas yang terus berubah setiap pekan.",
+    "content": "<p>Liga Indonesia terus menunjukkan perkembangan menarik. Beberapa klub tampil stabil, sementara tim lain mulai menemukan momentum pada fase penting musim ini.</p><h2>Faktor Kandang Masih Berpengaruh</h2><p>Dukungan suporter dan adaptasi lapangan tetap menjadi faktor yang sering memberi keuntungan bagi tuan rumah.</p><ul><li>Konsistensi lini belakang menjadi kunci.</li><li>Produktivitas penyerang lokal semakin diperhatikan.</li><li>Rotasi pemain menentukan performa di jadwal padat.</li></ul>",
+    "published": true,
+    "trending": true,
+    "featured": false,
+    "type": "article",
+    "autoDelete": false,
+    "createdAt": "2026-05-11T10:00:00.000Z",
+    "updatedAt": "2026-05-11T10:00:00.000Z",
+    "predictions": []
+  },
+  {
+    "id": "post-news-3",
+    "title": "Update Transfer: Klub Besar Mulai Berburu Penyerang Baru",
+    "slug": "update-transfer-klub-besar-mulai-berburu-penyerang-baru",
+    "category": "Transfer",
+    "tags": [
+      "Transfer",
+      "Rumor Transfer",
+      "Bursa Pemain"
+    ],
+    "author": "Redaksi Bola",
+    "thumbnail": "https://images.unsplash.com/photo-1517927033932-b3d18e61fb3a?auto=format&fit=crop&w=1200&q=80",
+    "cover": "https://images.unsplash.com/photo-1517927033932-b3d18e61fb3a?auto=format&fit=crop&w=1600&q=80",
+    "excerpt": "Bursa transfer mulai bergerak, beberapa klub besar dikabarkan mencari penyerang baru untuk memperkuat lini depan musim depan.",
+    "content": "<p>Pergerakan transfer mulai menjadi pembahasan utama. Klub-klub besar biasanya bergerak lebih cepat untuk mengamankan target sebelum harga pemain semakin naik.</p><h2>Kebutuhan Lini Depan</h2><p>Penyerang dengan penyelesaian akhir bagus masih menjadi komoditas paling dicari. Selain mencetak gol, pemain modern juga dituntut aktif dalam pressing dan build-up.</p>",
+    "published": true,
+    "trending": false,
+    "featured": true,
+    "type": "article",
+    "autoDelete": false,
+    "createdAt": "2026-05-10T12:00:00.000Z",
+    "updatedAt": "2026-05-10T12:00:00.000Z",
+    "predictions": []
+  },
+  {
+    "id": "post-news-4",
+    "title": "Champions League: Detail Kecil Bisa Jadi Pembeda",
+    "slug": "champions-league-detail-kecil-bisa-jadi-pembeda",
+    "category": "Champions League",
+    "tags": [
+      "Champions League",
+      "Liga Champions"
+    ],
+    "author": "Redaksi Bola",
+    "thumbnail": "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1200&q=80",
+    "cover": "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1600&q=80",
+    "excerpt": "Pada level Champions League, efektivitas peluang, disiplin bertahan, dan mental bermain sering menjadi pembeda utama.",
+    "content": "<p>Champions League selalu menghadirkan intensitas berbeda. Tim yang mampu menjaga konsentrasi sepanjang pertandingan biasanya memiliki peluang lebih besar untuk mendapatkan hasil positif.</p><table><thead><tr><th>Aspek</th><th>Pengaruh</th></tr></thead><tbody><tr><td>Transisi</td><td>Menentukan cepat lambatnya serangan balik</td></tr><tr><td>Set Piece</td><td>Bisa menjadi pembeda saat laga ketat</td></tr></tbody></table>",
+    "published": true,
+    "trending": false,
+    "featured": false,
+    "type": "article",
+    "autoDelete": false,
+    "createdAt": "2026-05-09T12:00:00.000Z",
+    "updatedAt": "2026-05-09T12:00:00.000Z",
+    "predictions": []
+  }
+]

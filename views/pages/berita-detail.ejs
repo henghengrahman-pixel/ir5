@@ -1,0 +1,53 @@
+<%- include('../partials/topbar') %>
+<%- include('../partials/ticker') %>
+<%- include('../partials/slider') %>
+<%- include('../partials/auth-buttons') %>
+
+<main class="container blog-wrap single-layout">
+  <div class="blog-layout">
+    <article class="single-post">
+      <a class="badge" href="/category/<%= categorySlug(post.category) %>"><%= post.category || 'Berita Bola' %></a>
+      <h1><%= post.title %></h1>
+      <div class="single-meta"><span><%= fmtDate(post.createdAt) %></span><span>•</span><span><%= post.author || 'Redaksi Bola' %></span><% (post.tags || []).forEach(function(tag){ %><span>• #<%= tag %></span><% }) %></div>
+      <% const heroImage = post.cover || post.thumbnail; %>
+      <% if (heroImage) { %>
+        <img class="single-cover" src="<%= heroImage %>" alt="<%= post.title %>" loading="lazy" onerror="this.style.display='none'">
+      <% } %>
+      <div class="share-row">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=<%= encodeURIComponent(shareUrl) %>" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://twitter.com/intent/tweet?url=<%= encodeURIComponent(shareUrl) %>&text=<%= encodeURIComponent(post.title) %>" target="_blank" rel="noopener">X</a>
+        <a href="https://api.whatsapp.com/send?text=<%= encodeURIComponent(post.title + ' ' + shareUrl) %>" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+      <div class="article-content"><%- post.content %></div>
+      <% if (related.length) { %>
+        <section class="related">
+          <h2>Related Article</h2>
+          <div class="related-grid">
+            <% related.forEach(function(item){ %>
+              <a href="<%= articleUrl(item) %>"><%= item.title %></a>
+            <% }) %>
+          </div>
+        </section>
+      <% } %>
+    </article>
+
+    <aside class="blog-sidebar">
+      <div class="widget search-widget">
+        <div class="widget-title">Cari Berita</div>
+        <form action="/search" method="get"><input name="q" placeholder="Cari berita bola..."><button>Cari</button></form>
+      </div>
+      <div class="widget">
+        <div class="widget-title">Artikel Terbaru</div>
+        <% latest.forEach(function(item){ %>
+          <a class="side-link" href="<%= articleUrl(item) %>"><%= item.title %></a>
+        <% }) %>
+      </div>
+      <% ads.filter(function(ad){ return ad.position === 'sidebar' || !ad.position }).slice(0,3).forEach(function(ad){ %>
+        <a class="ad-box" href="<%= ad.link || '#' %>" target="_blank" rel="noopener"><img src="<%= ad.image %>" alt="<%= ad.title || 'Banner' %>" loading="lazy"></a>
+      <% }) %>
+    </aside>
+  </div>
+</main>
+
+<%- include('../partials/footer') %>
+<%- include('../partials/quick-menu') %>

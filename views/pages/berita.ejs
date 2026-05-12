@@ -1,0 +1,63 @@
+<%- include('../partials/topbar') %>
+<%- include('../partials/ticker') %>
+<%- include('../partials/slider') %>
+<%- include('../partials/auth-buttons') %>
+
+<section class="news-hero">
+  <div class="container">
+    <span class="news-kicker">PORTAL BERITA BOLA</span>
+    <h1>Berita Bola Terbaru</h1>
+    <p>Update sepak bola, big match, transfer pemain, jadwal liga besar, dan artikel pilihan yang rapi untuk dibaca setiap hari.</p>
+  </div>
+</section>
+
+<main class="container blog-wrap">
+  <div class="blog-layout">
+    <section class="post-list">
+      <% if (!posts.length) { %>
+        <article class="news-empty"><h3>Belum ada berita</h3><p>Artikel berita bola belum tersedia.</p></article>
+      <% } %>
+      <% posts.forEach(function(post){ %>
+        <article class="news-card">
+          <a class="news-thumb" href="<%= articleUrl(post) %>">
+            <img src="<%= post.thumbnail || post.cover || settings.logoUrl || '/assets/img/default.jpg' %>" alt="<%= post.title %>" loading="lazy" onerror="this.src='<%= settings.logoUrl || '/assets/img/default.jpg' %>'">
+          </a>
+          <div class="news-body">
+            <a class="badge" href="/category/<%= categorySlug(post.category) %>"><%= post.category || 'Berita Bola' %></a>
+            <h2><a href="<%= articleUrl(post) %>"><%= post.title %></a></h2>
+            <div class="post-meta"><span><%= fmtDate(post.createdAt) %></span><span>•</span><span><%= post.author || 'Redaksi Bola' %></span></div>
+            <p><%= post.excerpt || 'Baca update lengkap berita bola terbaru, analisa pertandingan, dan informasi sepak bola pilihan hari ini.' %></p>
+            <a class="read-more" href="<%= articleUrl(post) %>">Baca Selengkapnya</a>
+          </div>
+        </article>
+      <% }) %>
+
+      <% if (totalPages > 1) { %>
+        <nav class="pagination">
+          <% for (let i = 1; i <= totalPages; i++) { %>
+            <a class="<%= i === currentPage ? 'on' : '' %>" href="/berita?page=<%= i %>"><%= i %></a>
+          <% } %>
+        </nav>
+      <% } %>
+    </section>
+
+    <aside class="blog-sidebar">
+      <div class="widget search-widget">
+        <div class="widget-title">Cari Berita</div>
+        <form action="/search" method="get"><input name="q" placeholder="Cari klub, liga, pemain..."><button>Cari</button></form>
+      </div>
+      <div class="widget">
+        <div class="widget-title">Trending</div>
+        <% allPosts.slice(0,6).forEach(function(item){ %>
+          <a class="side-link" href="<%= articleUrl(item) %>"><%= item.title %></a>
+        <% }) %>
+      </div>
+      <% ads.filter(function(ad){ return ad.position === 'sidebar' || !ad.position }).slice(0,3).forEach(function(ad){ %>
+        <a class="ad-box" href="<%= ad.link || '#' %>" target="_blank" rel="noopener"><img src="<%= ad.image %>" alt="<%= ad.title || 'Banner' %>" loading="lazy"></a>
+      <% }) %>
+    </aside>
+  </div>
+</main>
+
+<%- include('../partials/footer') %>
+<%- include('../partials/quick-menu') %>

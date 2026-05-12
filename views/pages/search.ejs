@@ -1,0 +1,27 @@
+<%- include('../partials/topbar') %>
+<%- include('../partials/ticker') %>
+<%- include('../partials/slider') %>
+<%- include('../partials/auth-buttons') %>
+
+<main class="container blog-wrap search-results">
+  <div class="latest-ribbon"><span><%= q || 'Hasil Pencarian' %></span></div>
+  <section class="post-list">
+    <% if (!posts.length) { %>
+      <article class="news-empty"><h3>Tidak ada hasil</h3><p>Coba kata kunci lain untuk mencari berita bola.</p></article>
+    <% } %>
+    <% posts.forEach(function(post){ %>
+      <article class="news-card">
+        <a class="news-thumb" href="<%= articleUrl ? articleUrl(post) : parlayUrl(post) %>"><img src="<%= post.thumbnail || post.cover || settings.logoUrl || '/assets/img/default.jpg' %>" alt="<%= post.title %>" loading="lazy"></a>
+        <div class="news-body">
+          <a class="badge" href="/category/<%= categorySlug ? categorySlug(post.category) : String(post.category || '').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'') %>"><%= post.category || 'Berita Bola' %></a>
+          <h2><a href="<%= articleUrl ? articleUrl(post) : parlayUrl(post) %>"><%= post.title %></a></h2>
+          <div class="post-meta"><span><%= fmtDate(post.createdAt) %></span><span>•</span><span><%= post.author || 'Redaksi Bola' %></span></div>
+          <p><%= post.excerpt || '' %></p>
+        </div>
+      </article>
+    <% }) %>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>
+<%- include('../partials/quick-menu') %>
