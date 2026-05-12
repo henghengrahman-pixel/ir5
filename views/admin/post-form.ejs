@@ -1,56 +1,484 @@
 <div class="admin-shell">
   <%- include('partials/sidebar') %>
+
   <main class="admin-main">
-    <h1><%= post ? 'Edit Berita Bola' : 'Tambah Berita Bola' %></h1>
-    <form class="admin-card admin-form-grid" method="post" enctype="multipart/form-data" action="<%= post ? '/admin/posts/' + post.id + '/update' : '/admin/posts' %>">
-      <label class="full">Judul Berita<input name="title" value="<%= post?.title || '' %>" required placeholder="Contoh: Barcelona Siapkan Transfer Besar Musim Panas Ini"></label>
-      <label>Slug URL<input name="slug" value="<%= post?.slug || '' %>" placeholder="otomatis kalau dikosongkan"></label>
-      <label>Kategori<input name="category" value="<%= post?.category || 'Berita Bola' %>" placeholder="Liga Inggris, Liga Indonesia, Transfer, Big Match"></label>
-      <label>Author<input name="author" value="<%= post?.author || 'Redaksi Bola' %>"></label>
-      <label>Tanggal<input type="datetime-local" name="createdAt" value="<%= post?.createdAt ? new Date(post.createdAt).toISOString().slice(0,16) : '' %>"></label>
-      <label>Tags pisah koma<input name="tags" value="<%= (post?.tags || []).join(', ') %>" placeholder="Barcelona, Transfer, Liga Spanyol"></label>
-      <label>Thumbnail URL<input name="thumbnailUrl" value="<%= post?.thumbnail || '' %>" placeholder="https://..."></label>
-      <label>Upload Thumbnail<input type="file" name="thumbnailFile" accept="image/*"></label>
-      <label>Cover URL<input name="coverUrl" value="<%= post?.cover || '' %>" placeholder="https://..."></label>
-      <label>Upload Cover<input type="file" name="coverFile" accept="image/*"></label>
-      <label class="full">Excerpt / Ringkasan<textarea name="excerpt" rows="3" placeholder="Ringkasan singkat untuk card berita"><%= post?.excerpt || '' %></textarea></label>
 
-      <div class="editor-toolbar full" data-target="contentEditor">
-        <button type="button" data-wrap="<h2>|</h2>">Heading</button>
-        <button type="button" data-wrap="<strong>|</strong>">Bold</button>
-        <button type="button" data-wrap="<em>|</em>">Italic</button>
-        <button type="button" data-wrap="<blockquote>|</blockquote>">Quote</button>
-        <button type="button" data-insert="<ul>\n<li>Poin pertama</li>\n<li>Poin kedua</li>\n</ul>">List</button>
-        <button type="button" data-insert="<table><thead><tr><th>Data</th><th>Keterangan</th></tr></thead><tbody><tr><td>Tim</td><td>Info</td></tr></tbody></table>">Table</button>
-        <button type="button" data-insert="<p><img src='URL_GAMBAR' alt='Berita bola'></p>">Image</button>
-        <button type="button" data-insert="<p><a href='URL_LINK'>Teks link</a></p>">Link</button>
-        <button type="button" data-insert="<div class='video-wrap'><iframe src='https://www.youtube.com/embed/VIDEO_ID' title='YouTube video' allowfullscreen></iframe></div>">YouTube</button>
+    <div class="admin-page-head">
+      <div>
+        <span class="eyebrow">News CMS</span>
+        <h1>
+          <%= post ? 'Edit Berita Bola' : 'Tambah Berita Bola' %>
+        </h1>
+        <p>
+          Kelola artikel berita bola dengan editor modern dan format otomatis.
+        </p>
       </div>
-      <label class="full">Isi Berita HTML<textarea id="contentEditor" name="content" rows="18" placeholder="<p>Tulis isi berita di sini...</p>"><%= post?.content || '' %></textarea></label>
+    </div>
 
-      <label class="checkbox"><input type="checkbox" name="published" <%= !post || post.published ? 'checked' : '' %>> Publish</label>
-      <label class="checkbox"><input type="checkbox" name="trending" <%= post?.trending ? 'checked' : '' %>> Trending</label>
-      <label class="checkbox"><input type="checkbox" name="featured" <%= post?.featured ? 'checked' : '' %>> Artikel Pilihan</label>
-      <div class="admin-actions-row full"><button class="admin-btn" type="submit">Simpan Berita</button><a class="admin-btn ghost" href="/admin/posts">Kembali</a></div>
+    <form
+      class="admin-card admin-form-grid"
+      method="post"
+      enctype="multipart/form-data"
+      action="<%= post ? '/admin/posts/' + post.id + '/update' : '/admin/posts' %>"
+      id="postForm"
+    >
+
+      <!-- ===================================================== -->
+      <!-- BASIC -->
+      <!-- ===================================================== -->
+
+      <label class="full">
+        <span>Judul Berita</span>
+
+        <input
+          id="titleInput"
+          name="title"
+          value="<%= post?.title || '' %>"
+          required
+          placeholder="Contoh: Barcelona Siapkan Transfer Besar Musim Panas Ini"
+        >
+      </label>
+
+      <label>
+        <span>Slug URL</span>
+
+        <input
+          id="slugInput"
+          name="slug"
+          value="<%= post?.slug || '' %>"
+          placeholder="otomatis kalau dikosongkan"
+        >
+      </label>
+
+      <label>
+        <span>Kategori</span>
+
+        <input
+          name="category"
+          value="<%= post?.category || 'Berita Bola' %>"
+          placeholder="Liga Inggris, Liga Indonesia, Transfer, Big Match"
+        >
+      </label>
+
+      <label>
+        <span>Author</span>
+
+        <input
+          name="author"
+          value="<%= post?.author || 'Redaksi Bola' %>"
+        >
+      </label>
+
+      <label>
+        <span>Tanggal</span>
+
+        <input
+          type="datetime-local"
+          name="createdAt"
+          value="<%= post?.createdAt ? new Date(post.createdAt).toISOString().slice(0,16) : '' %>"
+        >
+      </label>
+
+      <label>
+        <span>Tags (pisah koma)</span>
+
+        <input
+          name="tags"
+          value="<%= (post?.tags || []).join(', ') %>"
+          placeholder="Barcelona, Transfer, Liga Spanyol"
+        >
+      </label>
+
+      <!-- ===================================================== -->
+      <!-- IMAGE -->
+      <!-- ===================================================== -->
+
+      <label>
+        <span>Thumbnail URL</span>
+
+        <input
+          name="thumbnailUrl"
+          value="<%= post?.thumbnail || '' %>"
+          placeholder="https://..."
+        >
+      </label>
+
+      <label>
+        <span>Upload Thumbnail</span>
+
+        <input
+          type="file"
+          name="thumbnailFile"
+          accept="image/*"
+        >
+      </label>
+
+      <label>
+        <span>Cover URL</span>
+
+        <input
+          name="coverUrl"
+          value="<%= post?.cover || '' %>"
+          placeholder="https://..."
+        >
+      </label>
+
+      <label>
+        <span>Upload Cover</span>
+
+        <input
+          type="file"
+          name="coverFile"
+          accept="image/*"
+        >
+      </label>
+
+      <!-- ===================================================== -->
+      <!-- EXCERPT -->
+      <!-- ===================================================== -->
+
+      <label class="full">
+        <span>Excerpt / Ringkasan</span>
+
+        <textarea
+          name="excerpt"
+          rows="4"
+          placeholder="Ringkasan singkat untuk card berita"
+        ><%= post?.excerpt || '' %></textarea>
+      </label>
+
+      <!-- ===================================================== -->
+      <!-- TOOLBAR -->
+      <!-- ===================================================== -->
+
+      <div
+        class="editor-toolbar full"
+        data-target="contentEditor"
+      >
+
+        <button
+          type="button"
+          data-wrap="<h2>|</h2>"
+        >
+          H2
+        </button>
+
+        <button
+          type="button"
+          data-wrap="<h3>|</h3>"
+        >
+          H3
+        </button>
+
+        <button
+          type="button"
+          data-wrap="<strong>|</strong>"
+        >
+          Bold
+        </button>
+
+        <button
+          type="button"
+          data-wrap="<em>|</em>"
+        >
+          Italic
+        </button>
+
+        <button
+          type="button"
+          data-wrap="<blockquote>|</blockquote>"
+        >
+          Quote
+        </button>
+
+        <button
+          type="button"
+          data-insert="<ul>\n<li>Poin pertama</li>\n<li>Poin kedua</li>\n<li>Poin ketiga</li>\n</ul>"
+        >
+          List
+        </button>
+
+        <button
+          type="button"
+          data-insert="<table>\n<thead>\n<tr>\n<th>Data</th>\n<th>Keterangan</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Tim</td>\n<td>Informasi</td>\n</tr>\n</tbody>\n</table>"
+        >
+          Table
+        </button>
+
+        <button
+          type="button"
+          data-insert="<p><img src='URL_GAMBAR' alt='Berita Bola'></p>"
+        >
+          Image
+        </button>
+
+        <button
+          type="button"
+          data-insert="<p><a href='URL_LINK'>Teks Link</a></p>"
+        >
+          Link
+        </button>
+
+        <button
+          type="button"
+          data-insert="<iframe src='https://www.youtube.com/embed/VIDEO_ID' title='YouTube video' allowfullscreen></iframe>"
+        >
+          YouTube
+        </button>
+
+        <button
+          type="button"
+          id="paragraphBtn"
+        >
+          Auto Paragraph
+        </button>
+
+      </div>
+
+      <!-- ===================================================== -->
+      <!-- CONTENT -->
+      <!-- ===================================================== -->
+
+      <label class="full editor-field">
+
+        <div class="editor-head">
+          <span>Isi Berita</span>
+
+          <div class="editor-info">
+            Support HTML, gambar, tabel, embed YouTube, heading, list.
+          </div>
+        </div>
+
+        <textarea
+          id="contentEditor"
+          name="content"
+          rows="22"
+          placeholder="<p>Tulis isi berita di sini...</p>"
+        ><%= post?.content || '' %></textarea>
+
+      </label>
+
+      <!-- ===================================================== -->
+      <!-- PREVIEW -->
+      <!-- ===================================================== -->
+
+      <div class="full live-preview-wrap">
+
+        <div class="preview-head">
+          <h3>Preview Artikel</h3>
+          <button type="button" id="refreshPreview">
+            Refresh Preview
+          </button>
+        </div>
+
+        <div
+          id="livePreview"
+          class="live-preview"
+        ></div>
+
+      </div>
+
+      <!-- ===================================================== -->
+      <!-- STATUS -->
+      <!-- ===================================================== -->
+
+      <div class="full post-options">
+
+        <label class="checkbox">
+          <input
+            type="checkbox"
+            name="published"
+            <%= !post || post.published ? 'checked' : '' %>
+          >
+          Publish
+        </label>
+
+        <label class="checkbox">
+          <input
+            type="checkbox"
+            name="trending"
+            <%= post?.trending ? 'checked' : '' %>
+          >
+          Trending
+        </label>
+
+        <label class="checkbox">
+          <input
+            type="checkbox"
+            name="featured"
+            <%= post?.featured ? 'checked' : '' %>
+          >
+          Artikel Pilihan
+        </label>
+
+      </div>
+
+      <!-- ===================================================== -->
+      <!-- ACTION -->
+      <!-- ===================================================== -->
+
+      <div class="admin-actions-row full">
+
+        <button class="admin-btn" type="submit">
+          Simpan Berita
+        </button>
+
+        <a class="admin-btn ghost" href="/admin/posts">
+          Kembali
+        </a>
+
+      </div>
+
     </form>
+
   </main>
 </div>
+
 <script>
+
+  /* =========================================================
+     SLUG AUTO
+  ========================================================= */
+
+  const titleInput = document.getElementById('titleInput');
+  const slugInput = document.getElementById('slugInput');
+
+  if(titleInput && slugInput){
+
+    titleInput.addEventListener('input', () => {
+
+      if(slugInput.value.trim()) return;
+
+      slugInput.value = titleInput.value
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g,'-')
+        .replace(/^-|-$/g,'');
+
+    });
+
+  }
+
+  /* =========================================================
+     TOOLBAR
+  ========================================================= */
+
   document.querySelectorAll('.editor-toolbar button').forEach((btn) => {
+
     btn.addEventListener('click', () => {
+
+      if(btn.id === 'paragraphBtn'){
+        autoParagraph();
+        return;
+      }
+
       const toolbar = btn.closest('.editor-toolbar');
       const textarea = document.getElementById(toolbar.dataset.target);
+
       if (!textarea) return;
+
       const start = textarea.selectionStart;
       const end = textarea.selectionEnd;
-      const selected = textarea.value.slice(start, end) || 'Tulis teks di sini';
+
+      const selected =
+        textarea.value.slice(start, end) ||
+        'Tulis teks di sini';
+
       let insert = btn.dataset.insert || '';
+
       if (btn.dataset.wrap) {
-        const [before, after] = btn.dataset.wrap.split('|');
+
+        const [before, after] =
+          btn.dataset.wrap.split('|');
+
         insert = before + selected + after;
       }
-      textarea.setRangeText(insert, start, end, 'end');
+
+      textarea.setRangeText(
+        insert,
+        start,
+        end,
+        'end'
+      );
+
       textarea.focus();
+
+      renderPreview();
+
     });
+
   });
+
+  /* =========================================================
+     AUTO PARAGRAPH
+  ========================================================= */
+
+  function autoParagraph(){
+
+    const textarea =
+      document.getElementById('contentEditor');
+
+    if(!textarea) return;
+
+    const value =
+      textarea.value.trim();
+
+    if(!value) return;
+
+    if(
+      /<(p|h1|h2|h3|ul|ol|table|iframe|blockquote)/i.test(value)
+    ){
+      return;
+    }
+
+    const formatted = value
+      .replace(/\r\n/g, '\n')
+      .split(/\n{2,}/)
+      .map(paragraph => {
+
+        const text = paragraph.trim();
+
+        if(!text) return '';
+
+        return `<p>${text.replace(/\n/g,'<br>')}</p>`;
+
+      })
+      .join('\n\n');
+
+    textarea.value = formatted;
+
+    renderPreview();
+
+  }
+
+  /* =========================================================
+     LIVE PREVIEW
+  ========================================================= */
+
+  const preview =
+    document.getElementById('livePreview');
+
+  const contentEditor =
+    document.getElementById('contentEditor');
+
+  function renderPreview(){
+
+    if(!preview || !contentEditor) return;
+
+    preview.innerHTML =
+      contentEditor.value;
+
+  }
+
+  document
+    .getElementById('refreshPreview')
+    ?.addEventListener('click', renderPreview);
+
+  contentEditor?.addEventListener(
+    'input',
+    renderPreview
+  );
+
+  renderPreview();
+
 </script>
