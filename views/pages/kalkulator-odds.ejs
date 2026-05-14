@@ -3,52 +3,26 @@
 <%- include('../partials/slider') %>
 <%- include('../partials/auth-buttons') %>
 
-<section class="calc-top">
+<section class="parlay-calc-wrap">
+
   <div class="container">
 
-    <div class="calc-top-box">
+    <div class="parlay-calc-grid">
 
-      <div class="calc-top-content">
+      <!-- LEFT -->
 
-        <span class="calc-label">
-          Kalkulator Odds
-        </span>
+      <div class="parlay-card">
 
-        <h1>
-          Kalkulator Parlay
-        </h1>
+        <div class="parlay-card-title">
+          <i class="fa-solid fa-calculator"></i>
+          <span>Kalkulator</span>
+        </div>
 
-        <p>
-          Hitung kombinasi odds parlay dengan cepat,
-          simpel, dan nyaman digunakan.
-        </p>
+        <div class="parlay-form-group">
 
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-<main class="container calc-wrapper">
-
-  <div class="calc-left">
-
-    <div class="calc-box">
-
-      <div class="calc-head">
-        <h2>Input Odds</h2>
-      </div>
-
-      <div class="calc-form">
-
-        <label>
-          Nominal Modal
-        </label>
-
-        <div class="calc-input-money">
-
-          <span>Rp</span>
+          <label>
+            Jumlah Taruhan (Rp):
+          </label>
 
           <input
             id="stake"
@@ -56,63 +30,63 @@
             value="100000"
             min="1"
             step="1000"
-            placeholder="100000"
+            class="parlay-input"
           >
 
         </div>
 
-        <div class="calc-title-row">
-          <h3>Daftar Odds</h3>
-        </div>
+        <div class="parlay-form-group">
 
-        <div id="legsContainer">
+          <label>
+            Pilihan Taruhan (Odds):
+          </label>
 
-          <div class="calc-odds-row">
+          <div id="oddsContainer">
 
-            <div class="calc-number">
-              1
+            <div class="parlay-odds-item">
+
+              <input
+                class="oddsInput parlay-input"
+                type="number"
+                min="1"
+                step="0.01"
+                placeholder="Masukkan odds (contoh: 1.85)"
+              >
+
+              <button
+                type="button"
+                class="removeOdds"
+              >
+                ×
+              </button>
+
             </div>
-
-            <input
-              class="oddsInput"
-              type="number"
-              min="1"
-              step="0.01"
-              placeholder="1.85"
-            >
-
-            <button
-              class="removeOdds"
-              type="button"
-            >
-              ×
-            </button>
 
           </div>
 
         </div>
 
-        <div class="calc-buttons">
+        <div class="parlay-buttons">
 
           <button
-            id="addLeg"
-            class="btn-gold"
+            id="addOdds"
+            class="btn-yellow"
             type="button"
           >
-            Tambah Odds
+            + Tambah Pilihan
           </button>
 
           <button
-            id="calculateOdds"
+            id="calculate"
             class="btn-green"
             type="button"
           >
-            Hitung
+            Hitung Parlay
           </button>
 
           <button
-            id="resetOdds"
-            class="btn-dark"
+            id="reset"
+            class="btn-red"
             type="button"
           >
             Reset
@@ -120,7 +94,115 @@
 
         </div>
 
-        <div id="calcNotice"></div>
+        <div class="parlay-result">
+
+          <h3>
+            Hasil Perhitungan:
+          </h3>
+
+          <div class="result-row">
+            <span>Total Odds:</span>
+            <strong id="totalOdds">1.00</strong>
+          </div>
+
+          <div class="result-row">
+            <span>Potensi Kemenangan:</span>
+            <strong id="payout">Rp 0</strong>
+          </div>
+
+          <div class="result-row">
+            <span>Potensi Keuntungan:</span>
+            <strong id="profit">Rp 0</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT -->
+
+      <div class="parlay-card">
+
+        <div class="parlay-card-title">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Cara Menghitung Odds Parlay</span>
+        </div>
+
+        <div class="parlay-info-box">
+
+          <h3>
+            Apa itu Taruhan Parlay?
+          </h3>
+
+          <p>
+            Taruhan parlay adalah jenis taruhan
+            di mana Anda menggabungkan beberapa
+            taruhan menjadi satu.
+          </p>
+
+          <p>
+            Untuk memenangkan parlay,
+            semua taruhan harus menang.
+          </p>
+
+          <h3>
+            Rumus Menghitung Parlay
+          </h3>
+
+          <p>
+            Perhitungan dilakukan dengan
+            mengalikan seluruh odds,
+            kemudian dikalikan dengan jumlah taruhan.
+          </p>
+
+          <div class="formula-box">
+
+            <p>
+              Total Odds = Odds 1 × Odds 2 × Odds berikutnya
+            </p>
+
+            <p>
+              Kemenangan = Total Odds × Jumlah Taruhan
+            </p>
+
+            <p>
+              Keuntungan = Kemenangan - Jumlah Taruhan
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="parlay-info-box">
+
+          <h3>
+            Contoh Perhitungan:
+          </h3>
+
+          <p>
+            Misalkan Anda memasang taruhan
+            dengan 3 pilihan odds:
+          </p>
+
+          <ul>
+            <li>1.85</li>
+            <li>2.10</li>
+            <li>1.95</li>
+          </ul>
+
+          <div class="formula-box">
+
+            <p>
+              Total Odds = 1.85 × 2.10 × 1.95
+            </p>
+
+            <p>
+              Hasil dihitung otomatis sesuai modal taruhan.
+            </p>
+
+          </div>
+
+        </div>
 
       </div>
 
@@ -128,80 +210,22 @@
 
   </div>
 
-  <div class="calc-right">
-
-    <div class="calc-box">
-
-      <div class="calc-head">
-        <h2>Hasil Perhitungan</h2>
-      </div>
-
-      <div class="calc-result">
-
-        <div class="calc-result-item">
-          <span>Total Odds</span>
-          <strong id="totalOdds">1.00</strong>
-        </div>
-
-        <div class="calc-result-item">
-          <span>Estimasi Menang</span>
-          <strong id="payout">Rp 0</strong>
-        </div>
-
-        <div class="calc-result-item">
-          <span>Profit</span>
-          <strong id="profit">Rp 0</strong>
-        </div>
-
-      </div>
-
-      <div class="calc-note">
-
-        <h3>Cara Hitung</h3>
-
-        <p>
-          Semua odds akan dikalikan otomatis,
-          lalu dihitung berdasarkan nominal modal.
-        </p>
-
-      </div>
-
-    </div>
-
-    <div class="calc-box calc-guide">
-
-      <div class="calc-head">
-        <h2>Cara Pakai</h2>
-      </div>
-
-      <ul>
-        <li>Masukkan nominal modal taruhan.</li>
-        <li>Isi seluruh odds pilihan.</li>
-        <li>Klik tombol hitung.</li>
-      </ul>
-
-    </div>
-
-  </div>
-
-</main>
+</section>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
-  const container = document.getElementById('legsContainer');
+  const oddsContainer = document.getElementById('oddsContainer');
 
-  const addBtn = document.getElementById('addLeg');
-  const calcBtn = document.getElementById('calculateOdds');
-  const resetBtn = document.getElementById('resetOdds');
+  const addBtn = document.getElementById('addOdds');
+  const calcBtn = document.getElementById('calculate');
+  const resetBtn = document.getElementById('reset');
+
+  const stakeInput = document.getElementById('stake');
 
   const totalOdds = document.getElementById('totalOdds');
   const payout = document.getElementById('payout');
   const profit = document.getElementById('profit');
-
-  const stake = document.getElementById('stake');
-
-  const notice = document.getElementById('calcNotice');
 
   function formatRp(number) {
 
@@ -209,92 +233,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
   }
 
-  function updateNumbers() {
-
-    const rows = document.querySelectorAll('.calc-odds-row');
-
-    rows.forEach((row, index) => {
-
-      const no = row.querySelector('.calc-number');
-
-      no.textContent = index + 1;
-
-    });
-
-  }
-
-  function showNotice(text, success = false) {
-
-    notice.style.display = 'block';
-
-    notice.innerHTML = text;
-
-    notice.style.color = success
-      ? '#22c55e'
-      : '#ef4444';
-
-    clearTimeout(window.noticeTimer);
-
-    window.noticeTimer = setTimeout(() => {
-
-      notice.style.display = 'none';
-
-    }, 2000);
-
-  }
-
-  function createRow() {
+  function createOddsRow() {
 
     const row = document.createElement('div');
 
-    row.className = 'calc-odds-row';
+    row.className = 'parlay-odds-item';
 
     row.innerHTML = `
-      <div class="calc-number">
-        1
-      </div>
-
       <input
-        class="oddsInput"
+        class="oddsInput parlay-input"
         type="number"
         min="1"
         step="0.01"
-        placeholder="1.85"
+        placeholder="Masukkan odds (contoh: 1.85)"
       >
 
       <button
-        class="removeOdds"
         type="button"
+        class="removeOdds"
       >
         ×
       </button>
     `;
 
-    container.appendChild(row);
-
-    updateNumbers();
+    oddsContainer.appendChild(row);
 
   }
 
-  addBtn.addEventListener('click', createRow);
+  addBtn.addEventListener('click', createOddsRow);
 
-  container.addEventListener('click', (e) => {
+  oddsContainer.addEventListener('click', (e) => {
 
     if (!e.target.classList.contains('removeOdds')) return;
 
-    const rows = document.querySelectorAll('.calc-odds-row');
+    const rows = document.querySelectorAll('.parlay-odds-item');
 
-    if (rows.length <= 1) {
+    if (rows.length <= 1) return;
 
-      showNotice('Minimal 1 odds');
-
-      return;
-
-    }
-
-    e.target.closest('.calc-odds-row').remove();
-
-    updateNumbers();
+    e.target.closest('.parlay-odds-item').remove();
 
   });
 
@@ -302,82 +278,64 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const inputs = document.querySelectorAll('.oddsInput');
 
-    let oddsTotal = 1;
+    let odds = 1;
 
     let valid = true;
 
     inputs.forEach(input => {
 
-      const value = parseFloat(input.value);
+      const val = parseFloat(input.value);
 
-      if (isNaN(value) || value < 1) {
+      if (isNaN(val) || val < 1) {
 
         valid = false;
 
-        input.style.borderColor = '#ef4444';
+        input.style.borderColor = '#ff4d4d';
 
       } else {
 
-        input.style.borderColor = '';
+        input.style.borderColor = '#3a2a00';
 
-        oddsTotal *= value;
+        odds *= val;
 
       }
 
     });
 
-    if (!valid) {
+    if (!valid) return;
 
-      showNotice('Isi odds dengan benar');
+    const stake = parseFloat(stakeInput.value);
 
-      return;
+    if (isNaN(stake) || stake <= 0) return;
 
-    }
+    const total = odds * stake;
 
-    const modal = parseFloat(stake.value);
+    const untung = total - stake;
 
-    if (isNaN(modal) || modal <= 0) {
+    totalOdds.textContent = odds.toFixed(2);
 
-      showNotice('Nominal modal tidak valid');
-
-      return;
-
-    }
-
-    const hasil = oddsTotal * modal;
-
-    const untung = hasil - modal;
-
-    totalOdds.textContent = oddsTotal.toFixed(2);
-
-    payout.textContent = formatRp(hasil);
+    payout.textContent = formatRp(total);
 
     profit.textContent = formatRp(untung);
-
-    showNotice('Perhitungan berhasil', true);
 
   });
 
   resetBtn.addEventListener('click', () => {
 
-    container.innerHTML = `
-      <div class="calc-odds-row">
-
-        <div class="calc-number">
-          1
-        </div>
+    oddsContainer.innerHTML = `
+      <div class="parlay-odds-item">
 
         <input
-          class="oddsInput"
+          class="oddsInput parlay-input"
           type="number"
           min="1"
           step="0.01"
-          placeholder="1.85"
+          placeholder="Masukkan odds (contoh: 1.85)"
         >
 
         <button
-          class="removeOdds"
           type="button"
+          class="removeOdds"
         >
           ×
         </button>
@@ -385,7 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `;
 
-    stake.value = 100000;
+    stakeInput.value = 100000;
 
     totalOdds.textContent = '1.00';
 
@@ -393,11 +351,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     profit.textContent = 'Rp 0';
 
-    notice.style.display = 'none';
-
   });
-
-  updateNumbers();
 
 });
 </script>
