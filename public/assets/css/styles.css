@@ -2037,121 +2037,372 @@ SMALL MOBILE
   padding:40px 0 80px;
 }
 
-.odds-container{
-  max-width:900px;
-  margin:auto;
+/* =========================
+   KALKULATOR ODDS
+========================= */
+
+.calc-top{
+  padding:40px 0 10px;
 }
 
-.odds-card{
-  background:rgba(10,10,15,.88);
-  border:1px solid rgba(255,215,0,.18);
+.calc-top-box{
+  background:rgba(12,12,18,.88);
+  border:1px solid rgba(255,215,0,.12);
   border-radius:24px;
-  padding:30px;
-  backdrop-filter:blur(10px);
-  box-shadow:0 10px 40px rgba(0,0,0,.45);
-}
-
-.odds-header{
+  padding:40px;
   text-align:center;
-  margin-bottom:30px;
+  backdrop-filter:blur(12px);
+  box-shadow:0 10px 35px rgba(0,0,0,.35);
 }
 
-.odds-header h1{
-  font-size:38px;
+.calc-label{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:36px;
+  padding:0 18px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#f7b500,#ff8a00);
+  color:#111;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.4px;
+  margin-bottom:18px;
+}
+
+.calc-top-box h1{
+  font-size:42px;
   font-weight:800;
   color:#fff;
-  margin-bottom:10px;
+  margin:0 0 10px;
+  line-height:1.1;
 }
 
-.odds-header p{
-  color:#bfc7d8;
+.calc-top-box p{
+  color:#b8c0d4;
+  font-size:15px;
+  max-width:680px;
+  margin:auto;
+  line-height:1.7;
 }
 
-.odds-form label{
-  display:block;
-  margin-bottom:10px;
+/* ========================= */
+
+.calc-wrapper{
+  display:grid;
+  grid-template-columns:1.3fr .8fr;
+  gap:24px;
+  padding:25px 0 70px;
+}
+
+.calc-left,
+.calc-right{
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+}
+
+.calc-box{
+  background:rgba(10,10,16,.92);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:24px;
+  padding:28px;
+  backdrop-filter:blur(10px);
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+/* ========================= */
+
+.calc-head{
+  margin-bottom:24px;
+}
+
+.calc-head h2{
   color:#fff;
-  font-weight:700;
+  font-size:24px;
+  font-weight:800;
+  margin:0;
 }
 
-.odds-form input{
-  width:100%;
-  height:56px;
+/* ========================= */
+
+.calc-form label{
+  display:block;
+  color:#fff;
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.calc-input-money{
+  display:flex;
+  align-items:center;
+  background:#111827;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;
+  overflow:hidden;
+  margin-bottom:25px;
+}
+
+.calc-input-money span{
+  width:70px;
+  text-align:center;
+  color:#f7b500;
+  font-weight:800;
+  font-size:15px;
+}
+
+.calc-input-money input{
+  flex:1;
+  height:58px;
+  border:none;
+  background:transparent;
+  color:#fff;
+  font-size:16px;
+  padding:0 18px;
+}
+
+.calc-input-money input:focus{
+  outline:none;
+}
+
+/* ========================= */
+
+.calc-title-row{
+  margin-bottom:15px;
+}
+
+.calc-title-row h3{
+  color:#fff;
+  font-size:18px;
+  margin:0;
+}
+
+/* ========================= */
+
+.calc-odds-row{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:14px;
+}
+
+.calc-number{
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  background:#1a2333;
+  color:#f7b500;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  flex-shrink:0;
+}
+
+.calc-odds-row input{
+  flex:1;
+  height:52px;
   border-radius:14px;
   border:1px solid rgba(255,255,255,.08);
   background:#111827;
   color:#fff;
   padding:0 18px;
-  font-size:16px;
-  margin-bottom:16px;
+  font-size:15px;
 }
 
-.odds-row{
-  margin-bottom:14px;
+.calc-odds-row input:focus{
+  outline:none;
+  border-color:#f7b500;
 }
 
-.odds-buttons{
+.removeOdds{
+  width:48px;
+  height:48px;
+  border:none;
+  border-radius:14px;
+  background:#251414;
+  color:#ff6666;
+  font-size:24px;
+  cursor:pointer;
+  transition:.2s;
+  flex-shrink:0;
+}
+
+.removeOdds:hover{
+  background:#381818;
+}
+
+/* ========================= */
+
+.calc-buttons{
   display:flex;
   gap:12px;
   flex-wrap:wrap;
-  margin-top:15px;
+  margin-top:25px;
 }
 
-.odds-buttons button{
+.calc-buttons button{
   border:none;
   height:50px;
   padding:0 22px;
   border-radius:14px;
-  font-weight:700;
+  font-size:14px;
+  font-weight:800;
   cursor:pointer;
+  transition:.2s;
+}
+
+.calc-buttons button:hover{
+  transform:translateY(-2px);
+}
+
+.btn-gold{
+  background:linear-gradient(135deg,#f7b500,#ff8400);
+  color:#111;
+}
+
+.btn-green{
+  background:linear-gradient(135deg,#00b86b,#00d47d);
   color:#fff;
-  background:linear-gradient(135deg,#f7b500,#ff7b00);
 }
 
-.result-box{
-  margin-top:35px;
-  background:#0f172a;
-  border-radius:18px;
-  padding:22px;
+.btn-dark{
+  background:#1f2937;
+  color:#fff;
 }
 
-.result-item{
+/* ========================= */
+
+#calcNotice{
+  display:none;
+  margin-top:18px;
+  border-radius:14px;
+  padding:14px 18px;
+  font-size:14px;
+  font-weight:700;
+}
+
+/* ========================= */
+
+.calc-result{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.calc-result-item{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:14px 0;
-  border-bottom:1px solid rgba(255,255,255,.08);
+  padding:18px;
+  border-radius:16px;
+  background:#111827;
 }
 
-.result-item:last-child{
-  border-bottom:none;
+.calc-result-item span{
+  color:#c5cede;
+  font-size:14px;
 }
 
-.result-item span{
-  color:#cbd5e1;
-}
-
-.result-item strong{
+.calc-result-item strong{
   color:#fff;
   font-size:20px;
+  font-weight:800;
+}
+
+/* ========================= */
+
+.calc-note{
+  margin-top:24px;
+  padding:20px;
+  border-radius:18px;
+  background:#111827;
+}
+
+.calc-note h3{
+  color:#fff;
+  margin:0 0 12px;
+  font-size:18px;
+}
+
+.calc-note p{
+  color:#b8c0d4;
+  line-height:1.7;
+  margin:0;
+  font-size:14px;
+}
+
+/* ========================= */
+
+.calc-guide ul{
+  padding-left:18px;
+  margin:0;
+}
+
+.calc-guide li{
+  color:#c5cede;
+  margin-bottom:12px;
+  line-height:1.7;
+  font-size:14px;
+}
+
+/* ========================= */
+
+@media(max-width:991px){
+
+  .calc-wrapper{
+    grid-template-columns:1fr;
+  }
+
 }
 
 @media(max-width:768px){
 
-  .odds-card{
-    padding:20px;
+  .calc-top{
+    padding:25px 0 10px;
   }
 
-  .odds-header h1{
-    font-size:28px;
+  .calc-top-box{
+    padding:28px 22px;
+    border-radius:20px;
   }
 
-  .odds-buttons{
+  .calc-top-box h1{
+    font-size:30px;
+  }
+
+  .calc-box{
+    padding:22px;
+    border-radius:20px;
+  }
+
+  .calc-buttons{
     flex-direction:column;
   }
 
-  .odds-buttons button{
+  .calc-buttons button{
     width:100%;
+  }
+
+  .calc-odds-row{
+    gap:10px;
+  }
+
+  .calc-number{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+  }
+
+  .removeOdds{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+  }
+
+  .calc-odds-row input{
+    height:46px;
   }
 
 }
