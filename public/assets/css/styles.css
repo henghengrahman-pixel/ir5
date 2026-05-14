@@ -2038,11 +2038,16 @@ SMALL MOBILE
 }
 /* =========================
    PARLAY CALCULATOR
+   UNIVERSAL BACKGROUND
 ========================= */
 
 .parlay-calc-wrap{
+  position:relative;
   padding:35px 0 70px;
+  z-index:2;
 }
+
+/* ========================= */
 
 .parlay-calc-grid{
   display:grid;
@@ -2050,35 +2055,80 @@ SMALL MOBILE
   gap:22px;
 }
 
-/* ========================= */
+/* =========================
+   CARD UNIVERSAL
+========================= */
 
 .parlay-card{
-  background:rgba(18,8,2,.96);
-  border:2px solid #d89b00;
-  border-radius:18px;
-  padding:24px;
-  box-shadow:0 10px 35px rgba(0,0,0,.35);
+  position:relative;
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(10,10,14,.95),
+      rgba(18,18,24,.92)
+    );
+
+  border:1px solid rgba(255,255,255,.08);
+
+  border-radius:22px;
+
+  padding:26px;
+
+  backdrop-filter:blur(14px);
+
+  -webkit-backdrop-filter:blur(14px);
+
+  box-shadow:
+    0 10px 35px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.04);
 }
 
-/* ========================= */
+/* efek glow halus */
+
+.parlay-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(255,180,0,.10),
+      transparent 40%
+    );
+
+  pointer-events:none;
+}
+
+/* =========================
+   TITLE
+========================= */
 
 .parlay-card-title{
   display:flex;
   align-items:center;
   gap:12px;
-  color:#ffcc00;
-  font-size:20px;
-  font-weight:800;
+
   margin-bottom:24px;
-  padding-bottom:14px;
-  border-bottom:2px solid #d89b00;
+  padding-bottom:16px;
+
+  border-bottom:1px solid rgba(255,255,255,.08);
+
+  color:#fff;
+  font-size:22px;
+  font-weight:800;
 }
 
 .parlay-card-title i{
+  color:#ffb300;
   font-size:22px;
 }
 
-/* ========================= */
+/* =========================
+   FORM
+========================= */
 
 .parlay-form-group{
   margin-bottom:26px;
@@ -2086,121 +2136,204 @@ SMALL MOBILE
 
 .parlay-form-group label{
   display:block;
+
+  margin-bottom:12px;
+
   color:#fff;
   font-size:15px;
   font-weight:700;
-  margin-bottom:12px;
 }
 
-/* ========================= */
+/* =========================
+   INPUT
+========================= */
 
 .parlay-input{
   width:100%;
-  height:52px;
-  border-radius:10px;
-  border:2px solid #533300;
-  background:#1a0700;
+  height:54px;
+
+  border:none;
+
+  border-radius:14px;
+
+  background:
+    rgba(12,22,45,.88);
+
   color:#fff;
-  padding:0 16px;
+
+  padding:0 18px;
+
   font-size:15px;
+
   transition:.2s;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.06);
+}
+
+.parlay-input::placeholder{
+  color:#8b93a7;
 }
 
 .parlay-input:focus{
   outline:none;
-  border-color:#ffcc00;
+
+  background:
+    rgba(16,28,55,.95);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255,179,0,.55),
+    0 0 0 3px rgba(255,179,0,.08);
 }
 
-/* ========================= */
+/* =========================
+   ODDS ROW
+========================= */
 
 .parlay-odds-item{
   display:flex;
+  align-items:center;
   gap:10px;
+
   margin-bottom:12px;
 }
 
 .removeOdds{
   width:52px;
   height:52px;
+
   border:none;
-  border-radius:10px;
-  background:#d7263d;
-  color:#fff;
+
+  border-radius:14px;
+
+  background:
+    rgba(120,25,35,.45);
+
+  color:#ff6b6b;
+
   font-size:22px;
   font-weight:700;
+
   cursor:pointer;
-  flex-shrink:0;
+
   transition:.2s;
+
+  flex-shrink:0;
 }
 
 .removeOdds:hover{
-  opacity:.85;
+  background:
+    rgba(160,30,45,.65);
+
+  color:#fff;
 }
 
-/* ========================= */
+/* =========================
+   BUTTONS
+========================= */
 
 .parlay-buttons{
   display:flex;
   gap:12px;
   flex-wrap:wrap;
+
   margin-top:10px;
 }
 
 .parlay-buttons button{
+  height:50px;
+
   border:none;
-  border-radius:10px;
-  height:48px;
-  padding:0 18px;
+
+  border-radius:14px;
+
+  padding:0 20px;
+
   font-size:14px;
   font-weight:800;
+
   cursor:pointer;
+
   transition:.2s;
 }
 
 .parlay-buttons button:hover{
-  transform:translateY(-1px);
+  transform:translateY(-2px);
 }
 
 /* ========================= */
 
 .btn-yellow{
-  background:#ffbf00;
-  color:#2a1400;
+  background:
+    linear-gradient(
+      135deg,
+      #ffb300,
+      #ff8400
+    );
+
+  color:#1a1200;
 }
 
 .btn-green{
-  background:#00c06f;
+  background:
+    linear-gradient(
+      135deg,
+      #00b96b,
+      #00d27b
+    );
+
   color:#fff;
 }
 
 .btn-red{
-  background:#d7263d;
+  background:
+    linear-gradient(
+      135deg,
+      #d92d45,
+      #b71d35
+    );
+
   color:#fff;
 }
 
-/* ========================= */
+/* =========================
+   RESULT
+========================= */
 
 .parlay-result{
   margin-top:28px;
-  border:2px solid #d89b00;
-  border-radius:14px;
-  padding:22px;
-  background:#5c0000;
+
+  border-radius:18px;
+
+  padding:24px;
+
+  background:
+    rgba(8,16,35,.78);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.05);
 }
 
 .parlay-result h3{
-  text-align:center;
-  color:#ffcc00;
-  font-size:22px;
   margin:0 0 20px;
+
+  text-align:center;
+
+  color:#fff;
+
+  font-size:24px;
+  font-weight:800;
 }
 
 .result-row{
   display:flex;
   justify-content:space-between;
   align-items:center;
+
   padding:14px 0;
-  border-bottom:1px solid rgba(255,204,0,.25);
+
+  border-bottom:
+    1px solid rgba(255,255,255,.06);
 }
 
 .result-row:last-child{
@@ -2208,36 +2341,51 @@ SMALL MOBILE
 }
 
 .result-row span{
-  color:#fff;
-  font-size:16px;
+  color:#c9d1e2;
+  font-size:15px;
 }
 
 .result-row strong{
-  color:#ffcc00;
+  color:#ffb300;
+
   font-size:20px;
   font-weight:800;
 }
 
-/* ========================= */
+/* =========================
+   INFO BOX
+========================= */
 
 .parlay-info-box{
-  border:2px solid #d89b00;
-  border-radius:14px;
-  padding:22px;
-  background:#780000;
   margin-bottom:22px;
+
+  border-radius:18px;
+
+  padding:22px;
+
+  background:
+    rgba(8,16,35,.72);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.05);
 }
 
 .parlay-info-box h3{
-  color:#ffcc00;
-  font-size:20px;
   margin:0 0 14px;
+
+  color:#fff;
+
+  font-size:21px;
+  font-weight:800;
 }
 
 .parlay-info-box p{
-  color:#fff;
-  line-height:1.7;
   margin:0 0 14px;
+
+  color:#c8d0e0;
+
+  line-height:1.8;
+
   font-size:15px;
 }
 
@@ -2247,23 +2395,34 @@ SMALL MOBILE
 }
 
 .parlay-info-box li{
-  color:#fff;
+  color:#dbe3f3;
+
   margin-bottom:10px;
-  font-size:15px;
+
+  line-height:1.7;
 }
 
-/* ========================= */
+/* =========================
+   FORMULA
+========================= */
 
 .formula-box{
-  background:rgba(255,204,0,.12);
-  border-left:4px solid #ffcc00;
-  border-radius:10px;
-  padding:16px;
+  border-radius:14px;
+
+  padding:18px;
+
+  background:
+    rgba(255,179,0,.08);
+
+  border-left:
+    4px solid #ffb300;
 }
 
 .formula-box p{
   margin:0 0 10px;
-  color:#fff3c2;
+
+  color:#fff0c7;
+
   font-style:italic;
 }
 
@@ -2271,7 +2430,9 @@ SMALL MOBILE
   margin-bottom:0;
 }
 
-/* ========================= */
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:991px){
 
@@ -2289,7 +2450,7 @@ SMALL MOBILE
 
   .parlay-card{
     padding:18px;
-    border-radius:16px;
+    border-radius:18px;
   }
 
   .parlay-card-title{
@@ -2306,6 +2467,10 @@ SMALL MOBILE
 
   .parlay-result h3{
     font-size:20px;
+  }
+
+  .result-row{
+    gap:12px;
   }
 
   .result-row span{
