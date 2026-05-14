@@ -7,17 +7,24 @@
   <div class="container">
 
     <div class="calc-top-box">
-      <span class="calc-label">
-        Kalkulator Odds
-      </span>
 
-      <h1>
-        Kalkulator Parlay
-      </h1>
+      <div class="calc-top-content">
 
-      <p>
-        Hitung kombinasi odds parlay dengan cepat dan mudah.
-      </p>
+        <span class="calc-label">
+          Kalkulator Odds
+        </span>
+
+        <h1>
+          Kalkulator Parlay
+        </h1>
+
+        <p>
+          Hitung kombinasi odds parlay dengan cepat,
+          simpel, dan nyaman digunakan.
+        </p>
+
+      </div>
+
     </div>
 
   </div>
@@ -40,6 +47,7 @@
         </label>
 
         <div class="calc-input-money">
+
           <span>Rp</span>
 
           <input
@@ -50,6 +58,7 @@
             step="1000"
             placeholder="100000"
           >
+
         </div>
 
         <div class="calc-title-row">
@@ -152,7 +161,7 @@
 
         <p>
           Semua odds akan dikalikan otomatis,
-          lalu dikalikan dengan nominal modal.
+          lalu dihitung berdasarkan nominal modal.
         </p>
 
       </div>
@@ -180,27 +189,35 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
-  const legsContainer = document.getElementById('legsContainer');
-  const addLegBtn = document.getElementById('addLeg');
-  const calculateBtn = document.getElementById('calculateOdds');
+  const container = document.getElementById('legsContainer');
+
+  const addBtn = document.getElementById('addLeg');
+  const calcBtn = document.getElementById('calculateOdds');
   const resetBtn = document.getElementById('resetOdds');
 
-  const totalOddsEl = document.getElementById('totalOdds');
-  const payoutEl = document.getElementById('payout');
-  const profitEl = document.getElementById('profit');
+  const totalOdds = document.getElementById('totalOdds');
+  const payout = document.getElementById('payout');
+  const profit = document.getElementById('profit');
 
-  const stakeInput = document.getElementById('stake');
+  const stake = document.getElementById('stake');
+
   const notice = document.getElementById('calcNotice');
 
-  function rupiah(value) {
-    return 'Rp ' + Number(value).toLocaleString('id-ID');
+  function formatRp(number) {
+
+    return 'Rp ' + Number(number).toLocaleString('id-ID');
+
   }
 
-  function refreshNumber() {
+  function updateNumbers() {
 
-    document.querySelectorAll('.calc-odds-row').forEach((row, index) => {
+    const rows = document.querySelectorAll('.calc-odds-row');
 
-      row.querySelector('.calc-number').textContent = index + 1;
+    rows.forEach((row, index) => {
+
+      const no = row.querySelector('.calc-number');
+
+      no.textContent = index + 1;
 
     });
 
@@ -208,32 +225,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function showNotice(text, success = false) {
 
-    notice.innerHTML = text;
-
     notice.style.display = 'block';
 
-    notice.style.background = success
-      ? 'rgba(0,180,90,.15)'
-      : 'rgba(255,60,60,.15)';
+    notice.innerHTML = text;
 
     notice.style.color = success
-      ? '#00d26a'
-      : '#ff6666';
+      ? '#22c55e'
+      : '#ef4444';
 
-    setTimeout(() => {
+    clearTimeout(window.noticeTimer);
+
+    window.noticeTimer = setTimeout(() => {
+
       notice.style.display = 'none';
-    }, 2500);
+
+    }, 2000);
 
   }
 
-  addLegBtn.addEventListener('click', () => {
+  function createRow() {
 
     const row = document.createElement('div');
 
     row.className = 'calc-odds-row';
 
     row.innerHTML = `
-      <div class="calc-number">1</div>
+      <div class="calc-number">
+        1
+      </div>
 
       <input
         class="oddsInput"
@@ -251,19 +270,23 @@ document.addEventListener('DOMContentLoaded', () => {
       </button>
     `;
 
-    legsContainer.appendChild(row);
+    container.appendChild(row);
 
-    refreshNumber();
+    updateNumbers();
 
-  });
+  }
 
-  legsContainer.addEventListener('click', (e) => {
+  addBtn.addEventListener('click', createRow);
+
+  container.addEventListener('click', (e) => {
 
     if (!e.target.classList.contains('removeOdds')) return;
 
-    if (document.querySelectorAll('.calc-odds-row').length <= 1) {
+    const rows = document.querySelectorAll('.calc-odds-row');
 
-      showNotice('Minimal 1 odds.');
+    if (rows.length <= 1) {
+
+      showNotice('Minimal 1 odds');
 
       return;
 
@@ -271,15 +294,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     e.target.closest('.calc-odds-row').remove();
 
-    refreshNumber();
+    updateNumbers();
 
   });
 
-  calculateBtn.addEventListener('click', () => {
+  calcBtn.addEventListener('click', () => {
 
     const inputs = document.querySelectorAll('.oddsInput');
 
-    let totalOdds = 1;
+    let oddsTotal = 1;
+
     let valid = true;
 
     inputs.forEach(input => {
@@ -290,13 +314,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         valid = false;
 
-        input.style.borderColor = '#ff4d4d';
+        input.style.borderColor = '#ef4444';
 
       } else {
 
         input.style.borderColor = '';
 
-        totalOdds *= value;
+        oddsTotal *= value;
 
       }
 
@@ -304,38 +328,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!valid) {
 
-      showNotice('Isi semua odds dengan benar.');
+      showNotice('Isi odds dengan benar');
 
       return;
 
     }
 
-    const stake = parseFloat(stakeInput.value);
+    const modal = parseFloat(stake.value);
 
-    if (isNaN(stake) || stake <= 0) {
+    if (isNaN(modal) || modal <= 0) {
 
-      showNotice('Nominal modal tidak valid.');
+      showNotice('Nominal modal tidak valid');
 
       return;
 
     }
 
-    const payout = totalOdds * stake;
-    const profit = payout - stake;
+    const hasil = oddsTotal * modal;
 
-    totalOddsEl.textContent = totalOdds.toFixed(2);
-    payoutEl.textContent = rupiah(payout);
-    profitEl.textContent = rupiah(profit);
+    const untung = hasil - modal;
 
-    showNotice('Perhitungan berhasil.', true);
+    totalOdds.textContent = oddsTotal.toFixed(2);
+
+    payout.textContent = formatRp(hasil);
+
+    profit.textContent = formatRp(untung);
+
+    showNotice('Perhitungan berhasil', true);
 
   });
 
   resetBtn.addEventListener('click', () => {
 
-    stakeInput.value = 100000;
-
-    legsContainer.innerHTML = `
+    container.innerHTML = `
       <div class="calc-odds-row">
 
         <div class="calc-number">
@@ -360,13 +385,19 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `;
 
-    totalOddsEl.textContent = '1.00';
-    payoutEl.textContent = 'Rp 0';
-    profitEl.textContent = 'Rp 0';
+    stake.value = 100000;
 
-    showNotice('Berhasil direset.', true);
+    totalOdds.textContent = '1.00';
+
+    payout.textContent = 'Rp 0';
+
+    profit.textContent = 'Rp 0';
+
+    notice.style.display = 'none';
 
   });
+
+  updateNumbers();
 
 });
 </script>
