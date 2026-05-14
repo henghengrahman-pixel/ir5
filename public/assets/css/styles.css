@@ -2036,322 +2036,246 @@ SMALL MOBILE
 .odds-page{
   padding:40px 0 80px;
 }
-
 /* =========================
-   KALKULATOR ODDS
+   PARLAY CALCULATOR
 ========================= */
 
-.calc-top{
-  padding:40px 0 10px;
+.parlay-calc-wrap{
+  padding:35px 0 70px;
 }
 
-.calc-top-box{
-  background:rgba(12,12,18,.88);
-  border:1px solid rgba(255,215,0,.12);
-  border-radius:24px;
-  padding:40px;
-  text-align:center;
-  backdrop-filter:blur(12px);
+.parlay-calc-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+}
+
+/* ========================= */
+
+.parlay-card{
+  background:rgba(18,8,2,.96);
+  border:2px solid #d89b00;
+  border-radius:18px;
+  padding:24px;
   box-shadow:0 10px 35px rgba(0,0,0,.35);
 }
 
-.calc-label{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  height:36px;
-  padding:0 18px;
-  border-radius:999px;
-  background:linear-gradient(135deg,#f7b500,#ff8a00);
-  color:#111;
-  font-size:13px;
-  font-weight:800;
-  letter-spacing:.4px;
-  margin-bottom:18px;
-}
-
-.calc-top-box h1{
-  font-size:42px;
-  font-weight:800;
-  color:#fff;
-  margin:0 0 10px;
-  line-height:1.1;
-}
-
-.calc-top-box p{
-  color:#b8c0d4;
-  font-size:15px;
-  max-width:680px;
-  margin:auto;
-  line-height:1.7;
-}
-
 /* ========================= */
 
-.calc-wrapper{
-  display:grid;
-  grid-template-columns:1.3fr .8fr;
-  gap:24px;
-  padding:25px 0 70px;
-}
-
-.calc-left,
-.calc-right{
+.parlay-card-title{
   display:flex;
-  flex-direction:column;
-  gap:24px;
-}
-
-.calc-box{
-  background:rgba(10,10,16,.92);
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:24px;
-  padding:28px;
-  backdrop-filter:blur(10px);
-  box-shadow:0 10px 30px rgba(0,0,0,.35);
-}
-
-/* ========================= */
-
-.calc-head{
-  margin-bottom:24px;
-}
-
-.calc-head h2{
-  color:#fff;
-  font-size:24px;
+  align-items:center;
+  gap:12px;
+  color:#ffcc00;
+  font-size:20px;
   font-weight:800;
-  margin:0;
+  margin-bottom:24px;
+  padding-bottom:14px;
+  border-bottom:2px solid #d89b00;
+}
+
+.parlay-card-title i{
+  font-size:22px;
 }
 
 /* ========================= */
 
-.calc-form label{
+.parlay-form-group{
+  margin-bottom:26px;
+}
+
+.parlay-form-group label{
   display:block;
   color:#fff;
-  font-size:14px;
+  font-size:15px;
   font-weight:700;
-  margin-bottom:10px;
-}
-
-.calc-input-money{
-  display:flex;
-  align-items:center;
-  background:#111827;
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:16px;
-  overflow:hidden;
-  margin-bottom:25px;
-}
-
-.calc-input-money span{
-  width:70px;
-  text-align:center;
-  color:#f7b500;
-  font-weight:800;
-  font-size:15px;
-}
-
-.calc-input-money input{
-  flex:1;
-  height:58px;
-  border:none;
-  background:transparent;
-  color:#fff;
-  font-size:16px;
-  padding:0 18px;
-}
-
-.calc-input-money input:focus{
-  outline:none;
+  margin-bottom:12px;
 }
 
 /* ========================= */
 
-.calc-title-row{
-  margin-bottom:15px;
-}
-
-.calc-title-row h3{
-  color:#fff;
-  font-size:18px;
-  margin:0;
-}
-
-/* ========================= */
-
-.calc-odds-row{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  margin-bottom:14px;
-}
-
-.calc-number{
-  width:48px;
-  height:48px;
-  border-radius:14px;
-  background:#1a2333;
-  color:#f7b500;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:800;
-  flex-shrink:0;
-}
-
-.calc-odds-row input{
-  flex:1;
+.parlay-input{
+  width:100%;
   height:52px;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,.08);
-  background:#111827;
+  border-radius:10px;
+  border:2px solid #533300;
+  background:#1a0700;
   color:#fff;
-  padding:0 18px;
+  padding:0 16px;
   font-size:15px;
+  transition:.2s;
 }
 
-.calc-odds-row input:focus{
+.parlay-input:focus{
   outline:none;
-  border-color:#f7b500;
+  border-color:#ffcc00;
+}
+
+/* ========================= */
+
+.parlay-odds-item{
+  display:flex;
+  gap:10px;
+  margin-bottom:12px;
 }
 
 .removeOdds{
-  width:48px;
-  height:48px;
+  width:52px;
+  height:52px;
   border:none;
-  border-radius:14px;
-  background:#251414;
-  color:#ff6666;
-  font-size:24px;
+  border-radius:10px;
+  background:#d7263d;
+  color:#fff;
+  font-size:22px;
+  font-weight:700;
   cursor:pointer;
-  transition:.2s;
   flex-shrink:0;
+  transition:.2s;
 }
 
 .removeOdds:hover{
-  background:#381818;
+  opacity:.85;
 }
 
 /* ========================= */
 
-.calc-buttons{
+.parlay-buttons{
   display:flex;
   gap:12px;
   flex-wrap:wrap;
-  margin-top:25px;
+  margin-top:10px;
 }
 
-.calc-buttons button{
+.parlay-buttons button{
   border:none;
-  height:50px;
-  padding:0 22px;
-  border-radius:14px;
+  border-radius:10px;
+  height:48px;
+  padding:0 18px;
   font-size:14px;
   font-weight:800;
   cursor:pointer;
   transition:.2s;
 }
 
-.calc-buttons button:hover{
-  transform:translateY(-2px);
+.parlay-buttons button:hover{
+  transform:translateY(-1px);
 }
 
-.btn-gold{
-  background:linear-gradient(135deg,#f7b500,#ff8400);
-  color:#111;
+/* ========================= */
+
+.btn-yellow{
+  background:#ffbf00;
+  color:#2a1400;
 }
 
 .btn-green{
-  background:linear-gradient(135deg,#00b86b,#00d47d);
+  background:#00c06f;
   color:#fff;
 }
 
-.btn-dark{
-  background:#1f2937;
+.btn-red{
+  background:#d7263d;
   color:#fff;
 }
 
 /* ========================= */
 
-#calcNotice{
-  display:none;
-  margin-top:18px;
+.parlay-result{
+  margin-top:28px;
+  border:2px solid #d89b00;
   border-radius:14px;
-  padding:14px 18px;
-  font-size:14px;
-  font-weight:700;
+  padding:22px;
+  background:#5c0000;
 }
 
-/* ========================= */
-
-.calc-result{
-  display:flex;
-  flex-direction:column;
-  gap:14px;
+.parlay-result h3{
+  text-align:center;
+  color:#ffcc00;
+  font-size:22px;
+  margin:0 0 20px;
 }
 
-.calc-result-item{
+.result-row{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:18px;
-  border-radius:16px;
-  background:#111827;
+  padding:14px 0;
+  border-bottom:1px solid rgba(255,204,0,.25);
 }
 
-.calc-result-item span{
-  color:#c5cede;
-  font-size:14px;
+.result-row:last-child{
+  border-bottom:none;
 }
 
-.calc-result-item strong{
+.result-row span{
   color:#fff;
+  font-size:16px;
+}
+
+.result-row strong{
+  color:#ffcc00;
   font-size:20px;
   font-weight:800;
 }
 
 /* ========================= */
 
-.calc-note{
-  margin-top:24px;
-  padding:20px;
-  border-radius:18px;
-  background:#111827;
+.parlay-info-box{
+  border:2px solid #d89b00;
+  border-radius:14px;
+  padding:22px;
+  background:#780000;
+  margin-bottom:22px;
 }
 
-.calc-note h3{
+.parlay-info-box h3{
+  color:#ffcc00;
+  font-size:20px;
+  margin:0 0 14px;
+}
+
+.parlay-info-box p{
   color:#fff;
-  margin:0 0 12px;
-  font-size:18px;
+  line-height:1.7;
+  margin:0 0 14px;
+  font-size:15px;
 }
 
-.calc-note p{
-  color:#b8c0d4;
-  line-height:1.7;
-  margin:0;
-  font-size:14px;
+.parlay-info-box ul{
+  margin:0 0 16px 20px;
+  padding:0;
+}
+
+.parlay-info-box li{
+  color:#fff;
+  margin-bottom:10px;
+  font-size:15px;
 }
 
 /* ========================= */
 
-.calc-guide ul{
-  padding-left:18px;
-  margin:0;
+.formula-box{
+  background:rgba(255,204,0,.12);
+  border-left:4px solid #ffcc00;
+  border-radius:10px;
+  padding:16px;
 }
 
-.calc-guide li{
-  color:#c5cede;
-  margin-bottom:12px;
-  line-height:1.7;
-  font-size:14px;
+.formula-box p{
+  margin:0 0 10px;
+  color:#fff3c2;
+  font-style:italic;
+}
+
+.formula-box p:last-child{
+  margin-bottom:0;
 }
 
 /* ========================= */
 
 @media(max-width:991px){
 
-  .calc-wrapper{
+  .parlay-calc-grid{
     grid-template-columns:1fr;
   }
 
@@ -2359,50 +2283,37 @@ SMALL MOBILE
 
 @media(max-width:768px){
 
-  .calc-top{
-    padding:25px 0 10px;
+  .parlay-calc-wrap{
+    padding:20px 0 50px;
   }
 
-  .calc-top-box{
-    padding:28px 22px;
-    border-radius:20px;
+  .parlay-card{
+    padding:18px;
+    border-radius:16px;
   }
 
-  .calc-top-box h1{
-    font-size:30px;
+  .parlay-card-title{
+    font-size:18px;
   }
 
-  .calc-box{
-    padding:22px;
-    border-radius:20px;
-  }
-
-  .calc-buttons{
+  .parlay-buttons{
     flex-direction:column;
   }
 
-  .calc-buttons button{
+  .parlay-buttons button{
     width:100%;
   }
 
-  .calc-odds-row{
-    gap:10px;
+  .parlay-result h3{
+    font-size:20px;
   }
 
-  .calc-number{
-    width:42px;
-    height:42px;
-    border-radius:12px;
+  .result-row span{
+    font-size:14px;
   }
 
-  .removeOdds{
-    width:42px;
-    height:42px;
-    border-radius:12px;
-  }
-
-  .calc-odds-row input{
-    height:46px;
+  .result-row strong{
+    font-size:17px;
   }
 
 }
