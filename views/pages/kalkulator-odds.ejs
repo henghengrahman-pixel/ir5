@@ -3,247 +3,179 @@
 <%- include('../partials/slider') %>
 <%- include('../partials/auth-buttons') %>
 
-<section class="calc-hero">
-  <div class="container calc-hero-inner">
+<section class="calc-top">
+  <div class="container">
 
-    <div class="calc-hero-content">
-      <div class="calc-badge">
-        <span class="pulse"></span>
-        Kalkulator Odds Premium
-      </div>
+    <div class="calc-top-box">
+      <span class="calc-label">
+        Kalkulator Odds
+      </span>
 
       <h1>
-        Kalkulator Odds
-        <span>Parlay</span>
+        Kalkulator Parlay
       </h1>
 
       <p>
-        Hitung total odds, estimasi kemenangan, dan potensi profit
-        dari kombinasi taruhan parlay dengan tampilan modern
-        mengikuti tema website utama.
+        Hitung kombinasi odds parlay dengan cepat dan mudah.
       </p>
-
-      <div class="calc-hero-stats">
-        <div class="hero-stat">
-          <strong>Realtime</strong>
-          <span>Perhitungan Cepat</span>
-        </div>
-
-        <div class="hero-stat">
-          <strong>Premium</strong>
-          <span>Tampilan Modern</span>
-        </div>
-
-        <div class="hero-stat">
-          <strong>Accurate</strong>
-          <span>Estimasi Otomatis</span>
-        </div>
-      </div>
     </div>
 
   </div>
 </section>
 
-<main class="container calc-page">
+<main class="container calc-wrapper">
 
-  <section class="calc-card calc-main-card" aria-labelledby="calcTitle">
+  <div class="calc-left">
 
-    <div class="calc-card-head">
-      <div>
-        <span class="calc-eyebrow">Simulasi Cepat</span>
-        <h2 id="calcTitle">Masukkan Odds</h2>
+    <div class="calc-box">
+
+      <div class="calc-head">
+        <h2>Input Odds</h2>
       </div>
 
-      <div class="calc-icon" aria-hidden="true">
-        <i class="fa-solid fa-calculator"></i>
-      </div>
-    </div>
+      <div class="calc-form">
 
-    <div class="calc-field">
-      <label for="stake">Nominal Modal / Stake</label>
+        <label>
+          Nominal Modal
+        </label>
 
-      <div class="calc-money">
-        <span>Rp</span>
+        <div class="calc-input-money">
+          <span>Rp</span>
 
-        <input
-          id="stake"
-          type="number"
-          inputmode="numeric"
-          min="1"
-          step="1000"
-          value="100000"
-          placeholder="100000"
-          autocomplete="off"
-        >
-      </div>
-    </div>
-
-    <div class="calc-row-title">
-      <h3>Daftar Odds</h3>
-      <small>Minimal 1 odds</small>
-    </div>
-
-    <div id="legsContainer" class="calc-legs">
-
-      <div class="calc-leg">
-
-        <div class="calc-leg-no">
-          1
+          <input
+            id="stake"
+            type="number"
+            value="100000"
+            min="1"
+            step="1000"
+            placeholder="100000"
+          >
         </div>
 
-        <input
-          class="oddsInput"
-          type="number"
-          inputmode="decimal"
-          min="1"
-          step="0.01"
-          placeholder="Contoh: 1.85"
-          autocomplete="off"
-        >
+        <div class="calc-title-row">
+          <h3>Daftar Odds</h3>
+        </div>
 
-        <button
-          class="calc-remove"
-          type="button"
-          aria-label="Hapus odds"
-        >
-          ×
-        </button>
+        <div id="legsContainer">
+
+          <div class="calc-odds-row">
+
+            <div class="calc-number">
+              1
+            </div>
+
+            <input
+              class="oddsInput"
+              type="number"
+              min="1"
+              step="0.01"
+              placeholder="1.85"
+            >
+
+            <button
+              class="removeOdds"
+              type="button"
+            >
+              ×
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="calc-buttons">
+
+          <button
+            id="addLeg"
+            class="btn-gold"
+            type="button"
+          >
+            Tambah Odds
+          </button>
+
+          <button
+            id="calculateOdds"
+            class="btn-green"
+            type="button"
+          >
+            Hitung
+          </button>
+
+          <button
+            id="resetOdds"
+            class="btn-dark"
+            type="button"
+          >
+            Reset
+          </button>
+
+        </div>
+
+        <div id="calcNotice"></div>
 
       </div>
 
     </div>
 
-    <div class="calc-actions">
+  </div>
 
-      <button
-        id="addLeg"
-        class="calc-btn calc-btn-gold"
-        type="button"
-      >
-        + Tambah Odds
-      </button>
+  <div class="calc-right">
 
-      <button
-        id="calculateOdds"
-        class="calc-btn calc-btn-green"
-        type="button"
-      >
-        Hitung
-      </button>
+    <div class="calc-box">
 
-      <button
-        id="resetOdds"
-        class="calc-btn calc-btn-dark"
-        type="button"
-      >
-        Reset
-      </button>
-
-    </div>
-
-    <div
-      id="calcNotice"
-      class="calc-notice"
-      role="alert"
-      aria-live="polite"
-    ></div>
-
-  </section>
-
-  <aside class="calc-card calc-result-card" aria-labelledby="resultTitle">
-
-    <div class="calc-card-head">
-
-      <div>
-        <span class="calc-eyebrow">Hasil</span>
-        <h2 id="resultTitle">Ringkasan Perhitungan</h2>
+      <div class="calc-head">
+        <h2>Hasil Perhitungan</h2>
       </div>
 
-      <div class="calc-icon" aria-hidden="true">
-        %
+      <div class="calc-result">
+
+        <div class="calc-result-item">
+          <span>Total Odds</span>
+          <strong id="totalOdds">1.00</strong>
+        </div>
+
+        <div class="calc-result-item">
+          <span>Estimasi Menang</span>
+          <strong id="payout">Rp 0</strong>
+        </div>
+
+        <div class="calc-result-item">
+          <span>Profit</span>
+          <strong id="profit">Rp 0</strong>
+        </div>
+
+      </div>
+
+      <div class="calc-note">
+
+        <h3>Cara Hitung</h3>
+
+        <p>
+          Semua odds akan dikalikan otomatis,
+          lalu dikalikan dengan nominal modal.
+        </p>
+
       </div>
 
     </div>
 
-    <div class="calc-result-grid">
+    <div class="calc-box calc-guide">
 
-      <div class="calc-result-item">
-        <span>Total Odds</span>
-        <strong id="totalOdds">1.00</strong>
+      <div class="calc-head">
+        <h2>Cara Pakai</h2>
       </div>
 
-      <div class="calc-result-item">
-        <span>Estimasi Hasil</span>
-        <strong id="payout">Rp 0</strong>
-      </div>
-
-      <div class="calc-result-item">
-        <span>Estimasi Selisih</span>
-        <strong id="profit">Rp 0</strong>
-      </div>
+      <ul>
+        <li>Masukkan nominal modal taruhan.</li>
+        <li>Isi seluruh odds pilihan.</li>
+        <li>Klik tombol hitung.</li>
+      </ul>
 
     </div>
 
-    <div class="calc-info-box">
-
-      <h3>Rumus</h3>
-
-      <p>
-        Total Odds = Odds 1 × Odds 2 × Odds berikutnya.
-      </p>
-
-      <p>
-        Estimasi Hasil = Total Odds × Nominal Modal.
-      </p>
-
-    </div>
-
-    <div class="calc-info-box soft">
-
-      <h3>Catatan</h3>
-
-      <p>
-        Fitur ini hanya alat bantu hitung odds.
-        Gunakan secara bijak dan pastikan sesuai aturan yang berlaku.
-      </p>
-
-    </div>
-
-  </aside>
+  </div>
 
 </main>
-
-<section class="container calc-guide">
-
-  <div class="calc-card">
-
-    <h2>Cara Pakai</h2>
-
-    <div class="calc-guide-grid">
-
-      <div>
-        <b>1</b>
-        <span>Isi nominal modal.</span>
-      </div>
-
-      <div>
-        <b>2</b>
-        <span>Masukkan semua odds pilihan.</span>
-      </div>
-
-      <div>
-        <b>3</b>
-        <span>
-          Klik Hitung untuk melihat total odds
-          dan estimasi hasil.
-        </span>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -260,134 +192,142 @@ document.addEventListener('DOMContentLoaded', () => {
   const stakeInput = document.getElementById('stake');
   const notice = document.getElementById('calcNotice');
 
-  function formatRupiah(value) {
+  function rupiah(value) {
     return 'Rp ' + Number(value).toLocaleString('id-ID');
   }
 
-  function refreshNumbers() {
+  function refreshNumber() {
 
-    const legs = document.querySelectorAll('.calc-leg');
+    document.querySelectorAll('.calc-odds-row').forEach((row, index) => {
 
-    legs.forEach((leg, index) => {
-      const no = leg.querySelector('.calc-leg-no');
+      row.querySelector('.calc-number').textContent = index + 1;
 
-      if (no) {
-        no.textContent = index + 1;
-      }
     });
 
   }
 
-  function showNotice(text, type = 'error') {
+  function showNotice(text, success = false) {
 
-    notice.textContent = text;
-    notice.className = 'calc-notice show ' + type;
+    notice.innerHTML = text;
+
+    notice.style.display = 'block';
+
+    notice.style.background = success
+      ? 'rgba(0,180,90,.15)'
+      : 'rgba(255,60,60,.15)';
+
+    notice.style.color = success
+      ? '#00d26a'
+      : '#ff6666';
 
     setTimeout(() => {
-      notice.className = 'calc-notice';
+      notice.style.display = 'none';
     }, 2500);
 
   }
 
-  function createLeg() {
+  addLegBtn.addEventListener('click', () => {
 
-    const div = document.createElement('div');
+    const row = document.createElement('div');
 
-    div.className = 'calc-leg';
+    row.className = 'calc-odds-row';
 
-    div.innerHTML = `
-      <div class="calc-leg-no">1</div>
+    row.innerHTML = `
+      <div class="calc-number">1</div>
 
       <input
         class="oddsInput"
         type="number"
-        inputmode="decimal"
         min="1"
         step="0.01"
-        placeholder="Contoh: 1.85"
+        placeholder="1.85"
       >
 
       <button
-        class="calc-remove"
+        class="removeOdds"
         type="button"
-        aria-label="Hapus odds"
       >
         ×
       </button>
     `;
 
-    legsContainer.appendChild(div);
+    legsContainer.appendChild(row);
 
-    refreshNumbers();
+    refreshNumber();
 
-  }
-
-  addLegBtn.addEventListener('click', createLeg);
+  });
 
   legsContainer.addEventListener('click', (e) => {
 
-    if (!e.target.classList.contains('calc-remove')) return;
+    if (!e.target.classList.contains('removeOdds')) return;
 
-    const legs = document.querySelectorAll('.calc-leg');
+    if (document.querySelectorAll('.calc-odds-row').length <= 1) {
 
-    if (legs.length <= 1) {
-      showNotice('Minimal harus ada 1 odds.');
+      showNotice('Minimal 1 odds.');
+
       return;
+
     }
 
-    e.target.closest('.calc-leg').remove();
+    e.target.closest('.calc-odds-row').remove();
 
-    refreshNumbers();
+    refreshNumber();
 
   });
 
   calculateBtn.addEventListener('click', () => {
 
-    const oddsInputs = document.querySelectorAll('.oddsInput');
-
-    const stake = parseFloat(stakeInput.value);
-
-    if (isNaN(stake) || stake <= 0) {
-      showNotice('Nominal stake tidak valid.');
-      return;
-    }
+    const inputs = document.querySelectorAll('.oddsInput');
 
     let totalOdds = 1;
     let valid = true;
 
-    oddsInputs.forEach(input => {
+    inputs.forEach(input => {
 
-      const val = parseFloat(input.value);
+      const value = parseFloat(input.value);
 
-      if (isNaN(val) || val < 1) {
+      if (isNaN(value) || value < 1) {
 
         valid = false;
 
-        input.classList.add('invalid');
+        input.style.borderColor = '#ff4d4d';
 
       } else {
 
-        input.classList.remove('invalid');
+        input.style.borderColor = '';
 
-        totalOdds *= val;
+        totalOdds *= value;
 
       }
 
     });
 
     if (!valid) {
-      showNotice('Semua odds wajib diisi minimal 1.00');
+
+      showNotice('Isi semua odds dengan benar.');
+
       return;
+
+    }
+
+    const stake = parseFloat(stakeInput.value);
+
+    if (isNaN(stake) || stake <= 0) {
+
+      showNotice('Nominal modal tidak valid.');
+
+      return;
+
     }
 
     const payout = totalOdds * stake;
     const profit = payout - stake;
 
     totalOddsEl.textContent = totalOdds.toFixed(2);
-    payoutEl.textContent = formatRupiah(payout);
-    profitEl.textContent = formatRupiah(profit);
+    payoutEl.textContent = rupiah(payout);
+    profitEl.textContent = rupiah(profit);
 
-    showNotice('Perhitungan berhasil.', 'success');
+    showNotice('Perhitungan berhasil.', true);
 
   });
 
@@ -396,25 +336,23 @@ document.addEventListener('DOMContentLoaded', () => {
     stakeInput.value = 100000;
 
     legsContainer.innerHTML = `
-      <div class="calc-leg">
+      <div class="calc-odds-row">
 
-        <div class="calc-leg-no">
+        <div class="calc-number">
           1
         </div>
 
         <input
           class="oddsInput"
           type="number"
-          inputmode="decimal"
           min="1"
           step="0.01"
-          placeholder="Contoh: 1.85"
+          placeholder="1.85"
         >
 
         <button
-          class="calc-remove"
+          class="removeOdds"
           type="button"
-          aria-label="Hapus odds"
         >
           ×
         </button>
@@ -426,7 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
     payoutEl.textContent = 'Rp 0';
     profitEl.textContent = 'Rp 0';
 
-    showNotice('Kalkulator berhasil direset.', 'success');
+    showNotice('Berhasil direset.', true);
 
   });
 
