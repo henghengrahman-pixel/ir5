@@ -1,0 +1,103 @@
+<%- include('../partials/topbar') %>
+<%- include('../partials/ticker') %>
+<%- include('../partials/slider') %>
+<%- include('../partials/auth-buttons') %>
+
+<section class="calc-hero">
+  <div class="container calc-hero-inner">
+    <div class="calc-badge">Kalkulator Odds</div>
+    <h1>Kalkulator Odds Parlay</h1>
+    <p>Hitung total odds, estimasi hasil, dan selisih potensi dari beberapa pilihan odds dalam satu tampilan yang rapi.</p>
+  </div>
+</section>
+
+<main class="container calc-page">
+  <section class="calc-card calc-main-card" aria-labelledby="calcTitle">
+    <div class="calc-card-head">
+      <div>
+        <span class="calc-eyebrow">Simulasi Cepat</span>
+        <h2 id="calcTitle">Masukkan Odds</h2>
+      </div>
+      <div class="calc-icon" aria-hidden="true">⌁</div>
+    </div>
+
+    <div class="calc-field">
+      <label for="stake">Nominal Modal / Stake</label>
+      <div class="calc-money">
+        <span>Rp</span>
+        <input id="stake" type="number" inputmode="numeric" min="1" step="1000" value="100000" placeholder="100000" autocomplete="off">
+      </div>
+    </div>
+
+    <div class="calc-row-title">
+      <h3>Daftar Odds</h3>
+      <small>Minimal 1 odds</small>
+    </div>
+
+    <div id="legsContainer" class="calc-legs">
+      <div class="calc-leg">
+        <div class="calc-leg-no">1</div>
+        <input class="oddsInput" type="number" inputmode="decimal" min="1" step="0.01" placeholder="Contoh: 1.85" autocomplete="off">
+        <button class="calc-remove" type="button" aria-label="Hapus odds">×</button>
+      </div>
+    </div>
+
+    <div class="calc-actions">
+      <button id="addLeg" class="calc-btn calc-btn-gold" type="button">+ Tambah Odds</button>
+      <button id="calculateOdds" class="calc-btn calc-btn-green" type="button">Hitung</button>
+      <button id="resetOdds" class="calc-btn calc-btn-dark" type="button">Reset</button>
+    </div>
+
+    <div id="calcNotice" class="calc-notice" role="alert" aria-live="polite"></div>
+  </section>
+
+  <aside class="calc-card calc-result-card" aria-labelledby="resultTitle">
+    <div class="calc-card-head">
+      <div>
+        <span class="calc-eyebrow">Hasil</span>
+        <h2 id="resultTitle">Ringkasan Perhitungan</h2>
+      </div>
+      <div class="calc-icon" aria-hidden="true">%</div>
+    </div>
+
+    <div class="calc-result-grid">
+      <div class="calc-result-item">
+        <span>Total Odds</span>
+        <strong id="totalOdds">1.00</strong>
+      </div>
+      <div class="calc-result-item">
+        <span>Estimasi Hasil</span>
+        <strong id="payout">Rp 0</strong>
+      </div>
+      <div class="calc-result-item">
+        <span>Estimasi Selisih</span>
+        <strong id="profit">Rp 0</strong>
+      </div>
+    </div>
+
+    <div class="calc-info-box">
+      <h3>Rumus</h3>
+      <p>Total Odds = Odds 1 × Odds 2 × Odds berikutnya.</p>
+      <p>Estimasi Hasil = Total Odds × Nominal Modal.</p>
+    </div>
+
+    <div class="calc-info-box soft">
+      <h3>Catatan</h3>
+      <p>Fitur ini hanya alat bantu hitung odds. Gunakan secara bijak dan pastikan sesuai aturan yang berlaku.</p>
+    </div>
+  </aside>
+</main>
+
+<section class="container calc-guide">
+  <div class="calc-card">
+    <h2>Cara Pakai</h2>
+    <div class="calc-guide-grid">
+      <div><b>1</b><span>Isi nominal modal.</span></div>
+      <div><b>2</b><span>Masukkan semua odds pilihan.</span></div>
+      <div><b>3</b><span>Klik Hitung untuk melihat total odds dan estimasi hasil.</span></div>
+    </div>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>
+<%- include('../partials/quick-menu') %>
